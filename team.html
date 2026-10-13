@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research team | Yossiri Adulyasak</title>
+<meta name="description" content="Current and former students, researchers and postdocs of Yossiri Adulyasak at HEC Montréal.">
+<script>
+  /* When embedded (e.g. in Google Sites) hide the site's own navigation and footer.
+     Force with ?embed=1 or ?embed=0 in the URL. */
+  (function () {
+    var e = false;
+    try { e = window.self !== window.top; } catch (x) { e = true; }
+    if (/[?&]embed=1/.test(location.search)) e = true;
+    if (/[?&]embed=0/.test(location.search)) e = false;
+    if (e) document.documentElement.classList.add('embedded');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFCFD;
+    --surface: #FFFFFF;
+    --ink: #16202C;
+    --muted: #5B6776;
+    --rule: #E2E6EB;
+    --app: #0F6E66;
+    --app-bg: #E5F2F0;
+    --method: #4B3FB8;
+    --method-bg: #EEECFA;
+    --venue: #1F3B5C;
+    --venue-bg: #E8EDF3;
+    --hl: #96490A;
+    --hl-bg: #FBF0E2;
+    --focus: #2563EB;
+    --serif: "Literata", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not(.embedded) {
+      --paper: #10161D;
+      --surface: #151C24;
+      --ink: #E6EBF0;
+      --muted: #9AA6B4;
+      --rule: #27323E;
+      --app: #5CC4B7;
+      --app-bg: #13302E;
+      --method: #ADA4F6;
+      --method-bg: #25224A;
+      --venue: #A3BEDD;
+      --venue-bg: #1C2836;
+      --hl: #F0B26B;
+      --hl-bg: #382814;
+      --focus: #7FA7FF;
+    }
+  }
+  html.embedded body { background: #FFFFFF; }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 40px 24px 64px; }
+  html.embedded .wrap { padding-top: 12px; }
+  h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .lede { font-size: 1.12rem; color: var(--muted); max-width: 62ch; margin: 0 0 14px; }
+  .section { margin-top: 48px; }
+  .section > h2 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; margin: 0 0 6px; }
+  .section > .sec-note { color: var(--muted); font-size: 0.93rem; margin: 0 0 16px; max-width: 70ch; }
+  .section > h2 + :not(.sec-note) { margin-top: 14px; }
+  .prose { max-width: 68ch; }
+  .prose p { margin: 0 0 14px; }
+  .prose a, .inline-link { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+  .prose a:hover, .inline-link:hover { text-decoration-color: currentColor; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-size: 0.95rem; font-weight: 500;
+    padding: 9px 16px; border-radius: 6px; border: 1px solid var(--rule);
+    background: var(--surface); color: var(--ink);
+  }
+  .btn:hover { border-color: var(--muted); }
+  .btn-primary { background: var(--app); border-color: var(--app); color: var(--paper); }
+  .btn-primary:hover { border-color: var(--app); filter: brightness(1.08); }
+  button.btn { font: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer; }
+
+  /* Tiles: same treatment as the problem tiles on the publications page */
+  .tile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .tile {
+    display: block; text-decoration: none; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--app);
+    border-radius: 6px; padding: 14px 16px 15px;
+    transition: background-color .15s ease;
+  }
+  a.tile:hover { background: var(--app-bg); }
+  .tile .t-name { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.04rem; line-height: 1.3; margin-bottom: 5px; }
+  .tile .t-desc { display: block; font-size: 0.91rem; color: var(--muted); }
+  .tile .t-example { display: block; font-size: 0.86rem; margin-top: 8px; }
+  .tile .t-link { display: block; margin-top: 8px; font-size: 0.85rem; color: var(--app); font-weight: 500; }
+  .tile.plain { border-left-color: var(--venue); }
+
+  /* Timeline: dates in a left gutter, like the year gutter on the publications page */
+  .tl { list-style: none; margin: 0; padding: 0; max-width: 900px; }
+  .tl > li {
+    display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 2px 24px;
+    padding: 12px 0; border-top: 1px solid var(--rule);
+  }
+  .tl > li:first-child { border-top: 0; padding-top: 2px; }
+  .tl .when { color: var(--muted); font-size: 0.92rem; font-variant-numeric: tabular-nums; padding-top: 1px; }
+  .tl .what { min-width: 0; }
+  .tl .title { font-weight: 600; }
+  .tl .org a { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .tl .org a:hover { text-decoration-color: currentColor; }
+  .tl .sub { display: block; color: var(--muted); font-size: 0.92rem; }
+  .tl .sub a { color: inherit; }
+
+  .dl { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 10px 24px; margin: 0; max-width: 820px; }
+  .dl dt { color: var(--muted); font-size: 0.92rem; }
+  .dl dd { margin: 0; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 24px 16px 48px; }
+    .tl > li, .dl { grid-template-columns: minmax(0, 1fr); }
+    .dl dt { margin-top: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--rule); }
+  .topbar-inner {
+    max-width: 1160px; margin: 0 auto; padding: 14px 24px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px;
+  }
+  .brand { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; text-decoration: none; color: var(--ink); }
+  .nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.93rem; }
+  .nav a { color: var(--muted); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .nav a:hover { color: var(--ink); }
+  .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--app); }
+  html.embedded .topbar, html.embedded .site-foot { display: none; }
+
+  .site-foot { background: var(--surface); border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.9rem; }
+  .site-foot-inner {
+    max-width: 1160px; margin: 0 auto; padding: 24px 24px 32px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 40px;
+  }
+  .site-foot p { margin: 0 0 4px; }
+  .site-foot .foot-name { color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 1rem; }
+  .site-foot a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .site-foot a:hover { text-decoration-color: currentColor; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  @media (max-width: 600px) {
+    .topbar-inner, .site-foot-inner { padding-left: 16px; padding-right: 16px; }
+  }
+  @media print { .topbar, .site-foot { display: none !important; } }
+
+  .page { max-width: 780px; }
+  .page h1 { margin-bottom: 6px; }
+  .page .meta { color: var(--muted); margin: 0 0 26px; font-size: 0.95rem; }
+  .page h2 { font-family: var(--serif); font-weight: 600; font-size: 1.28rem; margin: 38px 0 10px; }
+  .page h3 { font-size: 1rem; font-weight: 600; margin: 22px 0 6px; }
+  .page p { margin: 0 0 14px; }
+  .page ul { margin: 0 0 14px; padding-left: 1.25em; }
+  .page li { margin: 5px 0; }
+  .page a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+  .page a:hover { text-decoration-color: currentColor; }
+
+  .dated { list-style: none; padding: 0 !important; margin: 0 0 14px; }
+  .dated > li { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 2px 18px; margin: 9px 0; }
+  .dated .when { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .dated ul { margin: 4px 0 0; }
+  .dated .sub { color: var(--muted); }
+
+  .profile { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 30px; }
+  .portrait {
+    position: relative; flex: none; width: 150px; aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden;
+    background: var(--app-bg); border: 1px solid var(--rule);
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait .mono {
+    display: none; position: absolute; inset: 0; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 600; font-size: 2.6rem; color: var(--app);
+  }
+  .portrait.no-photo .mono { display: flex; }
+  .roles { list-style: none; padding: 0 !important; margin: 10px 0 12px !important; color: var(--muted); }
+  .roles li { margin: 2px 0; }
+  .roles li:first-child { color: var(--ink); }
+  .contact { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; }
+
+  @media (max-width: 600px) {
+    .profile { flex-direction: column; gap: 16px; }
+    .portrait { width: 110px; }
+    .portrait .mono { font-size: 1.9rem; }
+    .dated > li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  }
+  @media print {
+    body { background: #fff; color: #000; }
+    .wrap { padding: 0; }
+    a { text-decoration: none !important; }
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">Yossiri Adulyasak</a><nav class="nav" aria-label="Site"><a href="index.html">Home</a><a href="cv.html">Brief CV</a><a href="publications.html">Publications</a><a href="team.html" aria-current="page">Research team</a><a href="links.html">Links</a></nav></div></header>
+<main class="wrap"><div class="page">
+
+<h1>Research team</h1>
+<p class="meta">Students and researchers (last update July 2026). Prospective students and postdocs are welcome to contact me at <a class="js-email" data-u="yossiri.adulyasak" data-d="hec.ca" href="index.html">yossiri.adulyasak [at] hec.ca</a>.</p>
+
+<h2>Current students, researchers and postdocs</h2>
+<h3>Postdoctoral researchers</h3>
+<ul>
+  <li><strong>Yuanyuan Li</strong> (Sep 2025 – present), co-advised with <a href="https://www.emmafrejinger.org/">E. Frejinger</a> and <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Xiaoxu Chen</strong> (Sep 2025 – present), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Nagisa Sugishita</strong> (Mar 2025 – present), co-advised with <a href="https://margaridacarvalho.org/">M. Carvalho</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>.</li>
+  <li><strong>David Pinzon</strong> (Mar 2025 – present), co-advised with <a href="https://margaridacarvalho.org/">M. Carvalho</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>.</li>
+  <li><strong>Nima Akbarzadeh</strong> (May 2023 – present), co-advised with <a href="https://tintin.hec.ca/pages/erick.delage/">E. Delage</a>.</li>
+</ul>
+<h3>Ph.D. students</h3>
+<ul>
+  <li><strong>Nolan Kassie</strong> (HEC Montréal, Aug 2026 – present), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Jai Kumar Drave</strong> (HEC Montréal, Sep 2024 – present), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Xiaoyue Zhu</strong> (HEC Montréal, Sep 2023 – present), co-advised with <a href="https://wenyi-xia.com/">W. Xia</a>.</li>
+  <li><strong>Xiaohui Tu</strong> (HEC Montréal, Sep 2022 – present), co-advised with <a href="https://tintin.hec.ca/pages/erick.delage/">E. Delage</a>.</li>
+  <li><strong>Saeede Hosseini</strong> (Polytechnique Montréal, Sep 2021 – present), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+</ul>
+<h3>M.Sc. students</h3>
+<ul>
+  <li><strong>Enrico Basili</strong> (HEC Montréal, May 2026 – present).</li>
+</ul>
+
+<h2>Former students, researchers and postdocs</h2>
+<h3>Postdoctoral researchers</h3>
+<ul>
+  <li><strong>David Tremblet</strong> (Jan 2025 – Jun 2026), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a> and <a href="https://www.hec.ca/en/profs/sonja-ursula-katharina.rohmer.html">S. Rohmer</a>. Position after: faculty at <a href="https://www.mines-stetienne.fr/">École des Mines de Saint-Étienne</a>.</li>
+  <li><strong>Weiquan Wang</strong> (Jun 2023 – Jun 2026), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>. Position after: postdoc at <a href="https://www.fsa.ulaval.ca/">Université Laval</a>.</li>
+  <li><strong>Linchuan Wei</strong> (Sep 2024 – May 2025), co-advised with <a href="https://www.emmafrejinger.org/">E. Frejinger</a>. Position after: faculty at <a href="https://sds.cuhk.edu.cn/en">The Chinese University of Hong Kong</a>.</li>
+  <li><strong>Fuliang Wu</strong> (Jan 2023 – Dec 2024), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: faculty at <a href="https://am.sysu.edu.cn/en/index.htm">Sun Yat-sen University</a>.</li>
+  <li><strong>Shabnam Mahmoudzadeh Vaziri</strong> (Sep 2024 – Dec 2024), co-advised with <a href="https://margaridacarvalho.org/">M. Carvalho</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>. Position after: data scientist at <a href="https://www.aircanada.com/">Air Canada</a>.</li>
+  <li><strong>Farzad Avishan</strong> (Oct 2023 – Dec 2024), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>. Position after: data scientist at <a href="https://www.aircanada.com/">Air Canada</a>.</li>
+  <li><strong>Milad Elyasi</strong> (Oct 2023 – Aug 2024), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>. Position after: faculty at <a href="https://www.ozyegin.edu.tr/en">Ozyegin University</a>.</li>
+  <li><strong>Said Rahal</strong> (Jun 2021 – Dec 2022), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a> and <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>. Position after: research fellow.</li>
+  <li><strong>Lingxiao Wu</strong> (Feb 2021 – Nov 2022), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: faculty at <a href="https://research.polyu.edu.hk/en/">The Hong Kong Polytechnic University</a>.</li>
+  <li><strong>Ramesh Ramasamy Pandi</strong> (Jan 2021 – Nov 2022), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a> and <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>. Position after: research scientist at <a href="https://www.amazon.science/">Amazon</a>.</li>
+  <li><strong>Mark Poon Ben Ben</strong> (Jan 2021 – Dec 2021), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: research scientist at <a href="https://www.amazon.science/">Amazon</a>.</li>
+  <li><strong>Karim Perez</strong> (Jun 2018 – Aug 2021), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>. Position after: data scientist at <a href="https://www.expretio.com/">ExPretio</a>.</li>
+  <li><strong>Simon Belieres</strong> (Jan 2020 – Aug 2021), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: faculty at <a href="https://www.tbs-education.com/">Toulouse Business School</a>.</li>
+  <li><strong>Mostafa Darwiche</strong> (Mar 2020 – Dec 2020), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a> and <a href="https://www.hec.ca/en/profs/jorge.mendoza.html">J. Mendoza</a>. Position after: start-up.</li>
+  <li><strong>Amira Dems</strong> (2017 – 2019), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: researcher at <a href="http://www.hydroquebec.com/innovation/en/institut-recherche.html">Hydro-Québec research institute (IREQ)</a>.</li>
+  <li><strong>Simon Thevenin</strong> (2017 – 2018), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: faculty at <a href="https://www.imt-atlantique.fr/en">IMT Atlantique</a>.</li>
+</ul>
+<h3>Ph.D. students</h3>
+<ul>
+  <li><strong>Mehdi Ghaniabadi</strong> (HEC Montréal, Jan 2019 – Apr 2024), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>. Position after: scientist at a software company.</li>
+  <li><strong>Duy Tan Nguyen</strong> (HEC Montréal, Sep 2018 – Dec 2023), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: faculty at <a href="https://www.gre.ac.uk/">University of Greenwich</a>.</li>
+  <li><strong>Mahdis Bayani</strong> (Polytechnique Montréal, Jan 2018 – Aug 2023), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>. Position after: data scientist at <a href="https://cme-emh.ca/en/">Energy Modelling Hub</a>.</li>
+  <li><strong>Paula Metzker Soares</strong> (IMT Atlantique, Sep 2019 – Nov 2022), co-advised with <a href="https://scholar.google.fr/citations?user=4kBACmkAAAAJ&amp;hl=fr">S. Thevenin</a> and <a href="https://www.emse.fr/~dolgui/">A. Dolgui</a>. Position after: postdoc at HEC Montréal, now faculty at <a href="https://www.univ-ubs.fr/fr/index.html">Université Bretagne Sud</a>.</li>
+  <li><strong>Narges Sereshti</strong> (HEC Montréal, Sep 2016 – Sep 2022), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>. Position after: data scientist at <a href="https://www.aircanada.com/">Air Canada</a>.</li>
+  <li><strong>Chun Cheng</strong> (Polytechnique Montréal, Sep 2017 – Sep 2020), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>. Position after: faculty at <a href="https://en.wikipedia.org/wiki/Dongbei_University_of_Finance_and_Economics">Dongbei University of Finance and Economics</a>.</li>
+</ul>
+<h3>Visiting researchers and Ph.D. interns</h3>
+<ul>
+  <li><strong>Entai Wang</strong>, visiting Ph.D. student (Beijing Jiaotong University, Jun 2024 – Dec 2025), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Jaike van Twiller</strong>, visiting Ph.D. student (IT University of Copenhagen, Jan 2024 – May 2024), co-advised with <a href="https://tintin.hec.ca/pages/erick.delage/">E. Delage</a> and <a href="https://www.itu.dk/~rmj/pmwiki/pmwiki.php">R. M. Jensen</a>.</li>
+  <li><strong>Aura Jalal</strong>, visiting Ph.D. student (Universidade Federal de São Carlos, Sep 2020 – Jan 2022), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>. Position after: postdoc at <a href="https://www.hec.ca/en/">HEC Montréal</a>.</li>
+  <li><strong>Yu Qinxiao</strong>, visiting Ph.D. student (Tianjin University, Sep 2018 – Oct 2019), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>. Position after: faculty at <a href="https://en.wikipedia.org/wiki/Civil_Aviation_University_of_China">Civil Aviation University of China</a>.</li>
+  <li><strong>Maaike Hoogeboom</strong>, visiting Ph.D. student (VU Amsterdam, visiting MIT, Feb 2018 – May 2018), co-advised with <a href="https://web.mit.edu/jaillet/www/">P. Jaillet</a> and <a href="https://research.vu.nl/en/persons/weh-dullaert">W. E. H. Dullaert</a>. Position after: data scientist at <a href="https://www.achmea.nl/">Achmea</a>.</li>
+  <li><strong>Arthur Maheo</strong>, visiting Ph.D. student (Australian National University, Aug 2016 – Dec 2016), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>. Position after: postdoc at Monash University, now researcher at <a href="https://www.amazon.science/">Amazon</a>.</li>
+  <li><strong>Karim Perez</strong>, visiting Ph.D. student (Federal University of São Carlos, Mar 2016 – Apr 2017), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>. Then a postdoc in the group.</li>
+  <li><strong>Thierry Moisan</strong>, Ph.D. research intern (JDA Labs, Jan 2015 – May 2015). Position after: data scientist at <a href="https://www.servicenow.com/">ServiceNow</a>.</li>
+  <li><strong>Lin Zhu</strong>, visiting professor (Oct 2019 – Dec 2020), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>. Position after: faculty at <a href="https://en.shmtu.edu.cn/">Shanghai Maritime University</a>.</li>
+</ul>
+<h3>M.Sc. theses</h3>
+<ul>
+  <li><strong>Jai Kumar Drave</strong> (HEC Montréal, Aug 2024), co-advised with <a href="https://www.hec.ca/en/profs/okan.arslan.html">O. Arslan</a>.</li>
+  <li><strong>Jayanti Mishra</strong> (HEC Montréal, Jan 2023), co-advised with <a href="https://wenyi-xia.com/">W. Xia</a>.</li>
+  <li><strong>Eva Terriault</strong> (Polytechnique Montréal, Dec 2022), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+  <li><strong>Feras Al-Basha</strong> (HEC Montréal, Apr 2021), co-advised with <a href="https://www.hec.ca/en/profs/laurent.charlin.html">L. Charlin</a>.</li>
+  <li><strong>Lotfi Chikh</strong> (HEC Montréal, Apr 2020), co-advised with <a href="http://www.hec.ca/en/profs/valerie.3.belanger.html">V. Bélanger</a>.</li>
+  <li><strong>David Suissa</strong> (HEC Montréal, Jun 2019), co-advised with <a href="https://www.deib.polimi.it/eng/people/details/1135640">O. Jabali</a>.</li>
+  <li><strong>Shuanghao Shi</strong> (HEC Montréal, Dec 2017).</li>
+  <li><strong>Jiajun Shao</strong> (HEC Montréal, Dec 2017).</li>
+</ul>
+<h3>M.Sc. projects</h3>
+<p class="meta" style="margin:0 0 8px">HEC Montréal unless noted.</p>
+<ul>
+  <li><strong>Yuxuan Du</strong> (May 2025 – Dec 2025).</li>
+  <li><strong>Olivia Gillard</strong> (Sep 2025 – Dec 2025).</li>
+  <li><strong>Xinjun Ye</strong> (Sep 2023 – Dec 2025), co-advised with <a href="https://wenyi-xia.com/">W. Xia</a>.</li>
+  <li><strong>Hongrui Yue</strong> (Sep 2024 – Apr 2025), co-advised with <a href="https://www.emmafrejinger.org/">E. Frejinger</a>.</li>
+  <li><strong>Andrea Luciano</strong> (May 2024 – Dec 2024).</li>
+  <li><strong>Aviral Sharma</strong> (Sep 2023 – Apr 2024).</li>
+  <li><strong>Ashish Bhaskaran Pillai</strong> (Sep 2023 – Apr 2024).</li>
+  <li><strong>Kush Sharma</strong> (Jan 2023 – Aug 2023).</li>
+  <li><strong>Vikas Bille</strong> (Sep 2022 – Apr 2023).</li>
+  <li><strong>Rohit Deshmukh</strong> (May 2022 – Dec 2022).</li>
+  <li><strong>Yash Patel</strong> (May 2022 – Dec 2022).</li>
+  <li><strong>Zihe Zhou</strong> (May 2022 – Dec 2022).</li>
+  <li><strong>Diane Domanec</strong> (May 2022 – Dec 2022).</li>
+  <li><strong>Sachin Abraham Varghese</strong> (Jan 2022 – Aug 2022), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Mohamad-Hossein Farahi</strong> (Sep 2021 – Apr 2022).</li>
+  <li><strong>Karissa Ronci</strong> (Sep 2021 – Apr 2022).</li>
+  <li><strong>Biswajit Sahoo</strong> (Sep 2021 – Apr 2022).</li>
+  <li><strong>Farzad Esmaeili</strong> (May 2021 – Dec 2021), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Alexis Raedemaecker</strong> (Sep 2020 – Apr 2021).</li>
+  <li><strong>Renaldo Hermawan</strong> (May 2020 – Dec 2020).</li>
+  <li><strong>Chia-Chia Wu</strong> (May 2020 – Apr 2021).</li>
+  <li><strong>Daheng Liu</strong> (Jan 2020 – Aug 2020).</li>
+  <li><strong>Jing Guo</strong> (Sep 2019 – Apr 2020), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Xinyan Dong</strong> (Sep 2019 – Apr 2020).</li>
+  <li><strong>Zhaoyue Su</strong> (Sep 2019 – Apr 2020).</li>
+  <li><strong>Ted Kong</strong> (May 2019 – Dec 2019), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Xiaohui Tu</strong> (May 2019 – Dec 2019), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Jia-Hui Feng</strong> (May 2019 – Dec 2019).</li>
+  <li><strong>Hai-Yang Bao</strong> (Jan 2019 – Aug 2019).</li>
+  <li><strong>Jieying Kong</strong> (Jan 2019 – Aug 2019).</li>
+  <li><strong>Niyati Deshmukh</strong> (Jan 2019 – Aug 2019).</li>
+  <li><strong>Phan Thuy Dung Nguyen</strong> (IMT Atlantique, Jan 2019 – Aug 2019), co-advised with <a href="https://scholar.google.fr/citations?user=4kBACmkAAAAJ&amp;hl=fr">S. Thevenin</a> and <a href="https://www.emse.fr/~dolgui/">A. Dolgui</a>.</li>
+  <li><strong>Mayukh Bhat</strong> (Sep 2018 – May 2019).</li>
+  <li><strong>Hoa Nguyen</strong> (Sep 2018 – May 2019).</li>
+  <li><strong>Zibo Wang</strong> (Sep 2018 – May 2019).</li>
+  <li><strong>Aaron-John-Teong-Yue Teo</strong> (Sep 2018 – May 2019).</li>
+  <li><strong>Haomin Chen</strong> (May 2018 – Dec 2018).</li>
+  <li><strong>Gabriel Tremblay</strong> (May 2018 – Dec 2018).</li>
+  <li><strong>Linghan Zhu</strong> (May 2018 – Aug 2018), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Asieh Haeri</strong> (Sep 2017 – May 2018), co-advised with <a href="https://www.hec.ca/en/profs/jean-francois.cordeau.html">J.-F. Cordeau</a>.</li>
+  <li><strong>Juliana Bodo</strong> (Sep 2017 – May 2018), co-advised with <a href="http://www.hec.ca/en/profs/valerie.3.belanger.html">V. Bélanger</a>.</li>
+  <li><strong>Shilpa Rawat</strong> (Sep 2017 – May 2018), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Chao Zhao</strong> (May 2017 – Jan 2018), co-advised with <a href="http://www.hec.ca/en/profs/marie-eve.rancourt.html">M.-È. Rancourt</a>.</li>
+  <li><strong>David Sanchez-Fernandez</strong> (May 2017 – Dec 2017), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Alex Delise</strong> (May 2017 – Dec 2017), co-advised with <a href="https://www.hec.ca/en/profs/raf.jans.html">R. Jans</a>.</li>
+  <li><strong>Duy Tan Nguyen</strong> (May 2017 – Nov 2017), co-advised with <a href="http://www.hec.ca/en/profs/sylvain.landry.html">S. Landry</a>.</li>
+  <li><strong>Vincent Zou</strong> (Maastricht University, visiting, Sep 2015 – Dec 2015).</li>
+  <li><strong>Zoë Kik</strong> (Maastricht University, visiting, Sep 2015 – Dec 2015).</li>
+</ul>
+<h3>Research interns</h3>
+<ul>
+  <li><strong>Jitsama Tanlamai</strong> (Mahidol University; intern at McGill, Mar 2020 – Feb 2021), co-advised with <a href="https://www.mcgill.ca/desautels/warut-khern-am-nuai">W. Khern-am-nuai</a>.</li>
+  <li><strong>Jiefeng Fang</strong> (École Polytechnique, France, Apr 2018 – Aug 2018), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+  <li><strong>Ta Duy Nguyen</strong> (École Polytechnique and NUS, Apr 2017 – Aug 2017), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+  <li><strong>Michel Deudon</strong> (École Polytechnique, France, Apr 2017 – Aug 2017), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+  <li><strong>Pierre Cournut</strong> (École Polytechnique, France, Apr 2017 – Aug 2017), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+  <li><strong>Yu Jia Cheong</strong> (École Polytechnique and NUS, Apr 2017 – Aug 2017), co-advised with <a href="http://hanalog.polymtl.ca/en/person/louis-martin-rousseau/">L.-M. Rousseau</a>.</li>
+  <li><strong>Yee Sian Ng</strong> (SMART, MIT, Aug 2013 – Dec 2013), co-advised with <a href="https://web.mit.edu/jaillet/www/">P. Jaillet</a> and M. Sim. Position after: software engineer at <a href="https://yeesian.com/">Google</a>.</li>
+</ul>
+
+</div></main>
+
+<script>
+(function () {
+  function fixLinks(root) {
+    var embedded = document.documentElement.classList.contains('embedded');
+    (root || document).querySelectorAll('.js-email').forEach(function (a) {
+      var e = a.dataset.u + '@' + a.dataset.d;
+      a.href = 'mailto:' + e;
+      if (!a.dataset.keep) a.textContent = e;
+    });
+    (root || document).querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (h.charAt(0) === '#' || h.indexOf('mailto:') === 0) return;
+      var external = /^https?:/.test(h);
+      // External links open in a new tab; inside an embed, every link does,
+      // so visitors never navigate inside the embed box.
+      if (external || embedded) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  }
+  window.siteFixLinks = fixLinks;
+  fixLinks(document);
+})();
+</script>
+</body>
+</html>

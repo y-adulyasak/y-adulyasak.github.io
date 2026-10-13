@@ -59,6 +59,7 @@
   html.embedded body { background: #FFFFFF; }
 
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0;
     background: var(--paper);
@@ -105,7 +106,6 @@
   .hint { color: var(--muted); font-size: 0.88rem; margin: 0; }
   .problem-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: 8px;
   }
   .problem {
@@ -127,8 +127,13 @@
     line-height: 1.28;
   }
   .problem .p-count { display: block; margin-top: 3px; font-size: 0.82rem; color: var(--muted); }
-  .problem[aria-pressed="true"] { background: var(--app); border-color: var(--app); color: #fff; }
-  .problem[aria-pressed="true"] .p-count { color: rgba(255,255,255,.85); }
+  .problems .problem-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .domains .problem { border-left-color: var(--method); }
+  .domains .problem:hover { background: var(--method-bg); }
+  .domains .problem[aria-pressed="true"] { background: var(--method); border-color: var(--method); }
+  .problems.domains { margin-top: -6px; }
+  .problem[aria-pressed="true"] { background: var(--app); border-color: var(--app); color: var(--paper); }
+  .problem[aria-pressed="true"] .p-count { color: var(--paper); opacity: .85; }
   .problem:disabled { opacity: .42; cursor: default; }
   .problem:disabled:hover { background: var(--surface); }
 
@@ -154,8 +159,8 @@
   .chip:hover { border-color: var(--muted); }
   .chip:disabled { opacity: .4; cursor: default; }
   .chip:disabled:hover { border-color: var(--rule); }
-  .chip[aria-pressed="true"] { color: #fff; }
-  .chip[aria-pressed="true"] .n { color: rgba(255,255,255,.82); }
+  .chip[aria-pressed="true"] { color: var(--paper); }
+  .chip[aria-pressed="true"] .n { color: var(--paper); opacity: .8; }
   .chip-method[aria-pressed="true"] { background: var(--method); border-color: var(--method); }
   .chip-venue[aria-pressed="true"] { background: var(--venue); border-color: var(--venue); }
   .chip-type[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
@@ -199,6 +204,7 @@
   .pill-venue { background: var(--venue-bg); color: var(--venue); }
   .pill-type { background: var(--rule); color: var(--ink); }
   .pill-hl { background: var(--hl-bg); color: var(--hl); }
+  .pill-dom { background: var(--method-bg); color: var(--method); }
   .pill-q { background: var(--rule); color: var(--ink); }
   .actions { display: flex; gap: 14px; margin-left: auto; }
   .copy-out { width: 100%; font: inherit; font-size: 0.82rem; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); color: var(--ink); margin-top: 8px; }
@@ -267,12 +273,30 @@
   }
   .tag-app { background: var(--app-bg); color: var(--app); }
   .tag-method { background: var(--method-bg); color: var(--method); }
+  .tag-dom { background: transparent; color: var(--method); border-color: var(--method); font-weight: 500; }
+  .tag-dom:hover, .tag-dom.on { background: var(--method-bg); }
+  .hlb {
+    display: inline-block; font: inherit; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em;
+    padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: 2px;
+    background: var(--hl-bg); color: var(--hl); white-space: nowrap;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .hlb:hover, .hlb.on { border-color: currentColor; }
+  .hlb-ind { background: var(--app-bg); color: var(--app); }
+  .venue-sets { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--rule); }
   .tag:hover, .tag.on { border-color: currentColor; }
   .links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.86rem; }
   .links a { color: var(--venue); font-weight: 500; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--venue) 35%, transparent); text-underline-offset: 3px; }
   .links a:hover { text-decoration-color: currentColor; }
 
   .empty-state { border-top: 1px solid var(--rule); padding: 28px 0; }
+  .datasets { border-top: 1px solid var(--rule); margin-top: 28px; padding-top: 20px; max-width: 78ch; scroll-margin-top: 12px; }
+  .datasets h2 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin: 0 0 14px; }
+  .datasets h3 { font-family: var(--serif); font-size: 1.02rem; font-weight: 600; line-height: 1.38; margin: 18px 0 2px; }
+  .datasets .ds-src { margin: 0 0 6px; font-size: 0.9rem; font-style: italic; color: var(--venue); }
+  .datasets ul { margin: 0; padding-left: 1.2em; font-size: 0.94rem; }
+  .datasets li { margin: 4px 0; }
+  .datasets a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
   .empty-state p { margin: 0 0 10px; }
   .btn {
     border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
@@ -297,7 +321,7 @@
   }
   @media (max-width: 600px) {
     .wrap { padding: 22px 16px 48px; }
-    .problem-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .problems .problem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .problem { padding: 10px 12px; }
     .problem .p-name { font-size: 0.93rem; }
     .actions { margin-left: 0; }
@@ -312,42 +336,72 @@
     .ylabel { position: static; }
     .pub { break-inside: avoid; }
   }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--rule); }
+  .topbar-inner {
+    max-width: 1160px; margin: 0 auto; padding: 14px 24px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px;
+  }
+  .brand { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; text-decoration: none; color: var(--ink); }
+  .nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.93rem; }
+  .nav a { color: var(--muted); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .nav a:hover { color: var(--ink); }
+  .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--app); }
+  html.embedded .topbar, html.embedded .site-foot { display: none; }
+
+  .site-foot { background: var(--surface); border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.9rem; }
+  .site-foot-inner {
+    max-width: 1160px; margin: 0 auto; padding: 24px 24px 32px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 40px;
+  }
+  .site-foot p { margin: 0 0 4px; }
+  .site-foot .foot-name { color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 1rem; }
+  .site-foot a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .site-foot a:hover { text-decoration-color: currentColor; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  @media (max-width: 600px) {
+    .topbar-inner, .site-foot-inner { padding-left: 16px; padding-right: 16px; }
+  }
+  @media print { .topbar, .site-foot { display: none !important; } }
 </style>
 </head>
 <body>
+<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">Yossiri Adulyasak</a><nav class="nav" aria-label="Site"><a href="index.html">Home</a><a href="cv.html">Brief CV</a><a href="publications.html" aria-current="page">Publications</a><a href="team.html">Research team</a><a href="links.html">Links</a></nav></div></header>
 <div class="wrap">
   <header class="site-head">
-    <p class="owner"><a href="https://sites.google.com/site/ayossiri/home" target="_blank" rel="noopener">Yossiri Adulyasak, HEC Montréal</a></p>
     <h1>Publications</h1>
     <p class="lede" id="lede"></p>
-    <div class="head-links">
-      <a href="https://sites.google.com/site/ayossiri/home" target="_blank" rel="noopener">Home</a>
-      <a href="https://scholar.google.ca/citations?user=Ru9Zco8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
-      <a href="https://sites.google.com/site/ayossiri/brief-cv" target="_blank" rel="noopener">CV</a>
-    </div>
   </header>
 
   <section class="problems" aria-labelledby="problems-h">
     <div class="problems-head">
-      <h2 id="problems-h">Browse by problem</h2>
+      <h2 id="problems-h">Browse by application</h2>
       <p class="hint">Select one or more. Select again to remove.</p>
     </div>
     <div class="problem-grid" id="problem-grid"></div>
   </section>
 
+  <section class="problems domains" aria-labelledby="domains-h">
+    <div class="problems-head">
+      <h2 id="domains-h">Browse by methodological domain</h2>
+      <p class="hint">Papers that draw on both carry both labels.</p>
+    </div>
+    <div class="problem-grid" id="domain-grid"></div>
+  </section>
+
   <div class="layout">
     <aside class="rail" aria-label="Filters">
       <details class="more-filters" id="more-filters">
-        <summary>Filter by method, venue and type <span id="more-count"></span></summary>
+        <summary>Filter by method, type and journal <span id="more-count"></span></summary>
         <div class="rail-body">
           <div class="fgroup"><h3>Method</h3><div class="chips" id="chips-method"></div></div>
+          <div class="fgroup"><h3>Type</h3><div class="chips" id="chips-type"></div></div>
           <div class="fgroup">
             <h3>Journal or conference</h3>
+            <div class="chips venue-sets" id="chips-vset"></div>
             <div class="chips" id="chips-venue"></div>
             <button type="button" class="linkish" id="venue-toggle"></button>
           </div>
-          <div class="fgroup"><h3>Type</h3><div class="chips" id="chips-type"></div></div>
-          <div class="fgroup"><h3>Highlights</h3><div class="chips" id="chips-hl"></div></div>
         </div>
       </details>
     </aside>
@@ -367,13 +421,31 @@
         <div id="copy-slot"></div>
       </div>
       <div id="list"></div>
+
+      <section class="datasets" id="instances" aria-labelledby="instances-h">
+        <h2 id="instances-h">Instances and results</h2>
+
+        <h3>Optimization-Based Adaptive Large Neighborhood Search for the Production Routing Problem</h3>
+        <p class="ds-src"><a href="https://pubsonline.informs.org/doi/abs/10.1287/trsc.1120.0443">Transportation Science 48(1), 2014</a></p>
+        <ul>
+          <li>Instance set A (Archetti et al. instances) [<a href="https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/PRP_Set_A">download</a>]</li>
+          <li>Instance set B (Boudia et al. instances) [<a href="https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/PRP_Set_B">download</a>]</li>
+        </ul>
+
+        <h3>Formulations and Branch-and-Cut Algorithms for Multi-Vehicle Production and Inventory Routing Problems</h3>
+        <p class="ds-src"><a href="https://doi.org/10.1287/ijoc.2013.0550">INFORMS Journal on Computing 26(1), 2014</a></p>
+        <ul>
+          <li>MVPRP instances, generated from instance set A above [<a href="https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/MVPRP">download</a>]</li>
+          <li>MVIRP instances, generated from the instances at <a href="http://www-c.eco.unibs.it/~bertazzi/abls.zip">www-c.eco.unibs.it/~bertazzi/abls.zip</a> [<a href="https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/MVIRP">download</a>]. See the computational experiments section of the paper for how the instances were generated.</li>
+        </ul>
+      </section>
       <noscript><p>This list needs JavaScript to display. The full list is on the <a href="https://sites.google.com/site/ayossiri/publications">publications page</a>.</p></noscript>
     </main>
   </div>
 
   <footer class="foot">
     <p id="updated"></p>
-    <p>Tags group each work by the business problem it addresses and the method it uses. Click any tag or venue name in the list to filter by it.</p>
+    <p>Tags group each work by application, methodological domain and method. Click any tag or venue name in the list to filter by it. UTD24 applies to published papers in those journals.</p>
   </footer>
 </div>
 
@@ -390,35 +462,47 @@
      d    volume, issue, pages, or patent number (optional)
      st   status, e.g. "To appear", "Online", "Under revision at ..." (optional)
      type journal | conference | wp | case | patent | other
-     app  problem tags (keys of APPS)
+     app  application tags (keys of APPS); use "fundamental" when the
+          work is not tied to one application
+     dm   methodological domain(s): "or", "ml", or both
      m    method tags (keys of METHODS)
-     hl   extra highlight tags: "case" (industry case)
+     ind  true for work done with an industrial partner; adds it to
+          "Industrial collaborations" under Type
      aw   awards: [["Award text", "url or null"]]
-     l    links: [["Label", "url"]]  — labels "Code" or "Instances" also
-          mark the item as "Code & data"
+     l    links: [["Label", "url"]]
+
+   UTD24 and ML/AI conference labels are not set per paper:
+   they come from the utd / ai flags on the venue in VENUES, and
+   apply to published journal and conference papers only.
    ===================================================================== */
 
 const UPDATED = "September 2026";
 
 const APPS = {
-  forecast:   ["Demand forecasting & retail analytics", "Forecasting, retail and e-commerce analytics, demand sensing"],
-  inventory:  ["Inventory & replenishment", "Inventory policies, service levels, replenishment, inventory routing"],
-  production: ["Production planning & scheduling", "Lot sizing, MRP, production routing, machine and job scheduling"],
-  routing:    ["Routing & fleet operations", "Vehicle routing, field service, home care, fleet and vehicle-sharing operations"],
-  drones:     ["Drones & last-mile delivery", "Drone routing and delivery"],
-  network:    ["Network design & facility location", "Facility location, capacity, resilient network design"],
-  transport:  ["Freight, ports, rail & air", "Freight procurement, container shipping, seaports, rail and airline operations"],
-  ev:         ["Electrification & sustainability", "Electric vehicles and aircraft, charging infrastructure, climate adaptation"],
-  health:     ["Healthcare & humanitarian", "Home health care, humanitarian relief and supply chains"],
-  platforms:  ["Digital platforms & e‑commerce", "Online reviews, recommendation, customer service and platform behaviour"]
+  prodinv:     ["Production & Inventory", "Lot sizing, MRP, production planning, inventory and replenishment policies"],
+  transport:   ["Transportation & Routing", "Vehicle and drone routing, field service, freight, ports, rail, air and electric fleets"],
+  network:     ["Network Design & Location", "Facility location, capacity planning, resilient and humanitarian network design"],
+  demand:      ["Demand & Retail", "Demand forecasting, retail analytics and demand behaviour"],
+  platforms:   ["Digital Platforms", "Online reviews, recommendation, customer service and platform behaviour"],
+  health:      ["Healthcare & Humanitarian", "Home health care, humanitarian relief and supply chains"],
+  fundamental: ["Fundamental Research", "Methodological work not tied to a single application"]
 };
 
+const DOMAINS = {
+  or: ["Operations Research", "Optimization, stochastic and robust models, decomposition and exact algorithms"],
+  ml: ["Machine Learning / AI", "Machine learning, reinforcement learning, MDPs and AI planning"]
+};
+
+/* Filters list methods, types, applications and domains in the order written here. */
 const METHODS = {
   unc:    "Optimization under uncertainty",
-  robust: "Robust & distributionally robust",
   algo:   "Exact & large-scale algorithms",
-  ml:     "Machine learning & AI",
+  robust: "Robust & distributionally robust",
   rl:     "MDPs, bandits & reinforcement learning",
+  sup:    "Supervised ML",
+  unsup:  "Unsupervised ML",
+  llm:    "LLMs",
+  aiapp:  "AI applications",
   emp:    "Empirical & simulation studies"
 };
 
@@ -428,395 +512,404 @@ const TYPES = {
   wp:         "Under review & submitted",
   case:       "Teaching cases",
   patent:     "Patents",
-  other:      "Thesis & reports"
+  other:      "Thesis & reports",
+  industry:   "Industrial collaborations"
 };
 
+/* Venue groups shown first under "Journal or conference" and as badges on papers.
+   Membership comes from the utd / ai flags in VENUES below. */
 const HIGHLIGHTS = {
-  award: "Award-winning",
-  case:  "Industry case",
-  code:  "Code & data"
+  utd: ["UTD24", "Journals used in the UT Dallas business school research rankings"],
+  ai:  ["ML/AI conferences", "Machine learning and artificial intelligence conferences"]
 };
+
+/* Journals and conferences. The filter lists them in the order written here:
+   move a line up or down to change the order. The first VENUES_SHOWN appear
+   before "Show all"; the rest appear when it is clicked.
+   utd / ai flags put a venue in the UTD24 and ML/AI conference groups
+   shown at the top of the filter. */
+const VENUES_SHOWN = 10;
 
 const VENUES = {
-  ijoc:     { s: "INFORMS J. on Computing",        f: "INFORMS Journal on Computing" },
-  ts:       { s: "Transportation Science",          f: "Transportation Science" },
-  or:       { s: "Operations Research",             f: "Operations Research" },
-  msom:     { s: "MSOM",                            f: "Manufacturing & Service Operations Management" },
-  pom:      { s: "POM",                             f: "Production and Operations Management" },
-  ejor:     { s: "EJOR",                            f: "European Journal of Operational Research" },
-  omega:    { s: "Omega",                           f: "Omega: The International Journal of Management Science" },
+  ijoc:     { s: "INFORMS J. on Computing",        f: "INFORMS Journal on Computing", utd: true },
   cor:      { s: "Computers & OR",                  f: "Computers & Operations Research" },
+  omega:    { s: "Omega",                           f: "Omega: The International Journal of Management Science" },
+  ts:       { s: "Transportation Science",          f: "Transportation Science" },
   trb:      { s: "Transportation Research B",       f: "Transportation Research Part B: Methodological" },
-  trc:      { s: "Transportation Research C",       f: "Transportation Research Part C: Emerging Technologies" },
-  trd:      { s: "Transportation Research D",       f: "Transportation Research Part D: Transport and Environment" },
   tre:      { s: "Transportation Research E",       f: "Transportation Research Part E: Logistics and Transportation Review" },
+  aaai:     { s: "AAAI",                            f: "AAAI Conference on Artificial Intelligence", ai: true },
+  aisoc:    { s: "AI & Society",                    f: "AI & Society" },
+  aistats:  { s: "AISTATS",                         f: "International Conference on Artificial Intelligence and Statistics (AISTATS)", ai: true },
+  ejor:     { s: "EJOR",                            f: "European Journal of Operational Research" },
   ijoo:     { s: "INFORMS J. on Optimization",      f: "INFORMS Journal on Optimization" },
+  jair:     { s: "JAIR",                            f: "Journal of Artificial Intelligence Research" },
+  msom:     { s: "MSOM",                            f: "Manufacturing & Service Operations Management", utd: true },
+  or:       { s: "Operations Research",             f: "Operations Research", utd: true },
+  ricg:     { s: "Revue int. de cas en gestion",    f: "Revue internationale de cas en gestion" },
+  cpaior:   { s: "CPAIOR",                          f: "Integration of Constraint Programming, Artificial Intelligence, and Operations Research (CPAIOR)", ai: true },
+  ecml:     { s: "ECML PKDD",                       f: "European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD)", ai: true },
+  ecr:      { s: "Electronic Commerce Research",    f: "Electronic Commerce Research" },
+  icaps:    { s: "ICAPS",                           f: "International Conference on Automated Planning and Scheduling (ICAPS)", ai: true },
+  emr:      { s: "IEEE Eng. Management Review",     f: "IEEE Engineering Management Review" },
+  tase:     { s: "IEEE T-ASE",                      f: "IEEE Transactions on Automation Science and Engineering" },
+  infor:    { s: "INFOR",                           f: "INFOR: Information Systems and Operational Research" },
   ijaa:     { s: "INFORMS J. on Applied Analytics", f: "INFORMS Journal on Applied Analytics" },
   ijpr:     { s: "Int. J. of Production Research", f: "International Journal of Production Research" },
-  infor:    { s: "INFOR",                           f: "INFOR: Information Systems and Operational Research" },
-  tase:     { s: "IEEE T-ASE",                      f: "IEEE Transactions on Automation Science and Engineering" },
-  emr:      { s: "IEEE Eng. Management Review",     f: "IEEE Engineering Management Review" },
-  aisoc:    { s: "AI & Society",                    f: "AI & Society" },
-  ecr:      { s: "Electronic Commerce Research",    f: "Electronic Commerce Research" },
   networks: { s: "Networks",                        f: "Networks" },
-  jair:     { s: "JAIR",                            f: "Journal of Artificial Intelligence Research" },
-  neurips:  { s: "NeurIPS",                         f: "Advances in Neural Information Processing Systems (NeurIPS)" },
-  aaai:     { s: "AAAI",                            f: "AAAI Conference on Artificial Intelligence" },
-  aistats:  { s: "AISTATS",                         f: "International Conference on Artificial Intelligence and Statistics (AISTATS)" },
-  icaps:    { s: "ICAPS",                           f: "International Conference on Automated Planning and Scheduling (ICAPS)" },
-  cpaior:   { s: "CPAIOR",                          f: "Integration of Constraint Programming, Artificial Intelligence, and Operations Research (CPAIOR)" },
-  ecml:     { s: "ECML PKDD",                       f: "European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD)" },
-  ricg:     { s: "Revue int. de cas en gestion",    f: "Revue internationale de cas en gestion" }
+  neurips:  { s: "NeurIPS",                         f: "Advances in Neural Information Processing Systems (NeurIPS)", ai: true },
+  pom:      { s: "POM",                             f: "Production and Operations Management", utd: true },
+  trc:      { s: "Transportation Research C",       f: "Transportation Research Part C: Emerging Technologies" },
+  trd:      { s: "Transportation Research D",       f: "Transportation Research Part D: Transport and Environment" }
 };
 
 const PUBS = [
   /* ---------- 2026 ---------- */
   { y: 2026, type: "journal", a: "Wu, L., Shan, W., Adulyasak, Y., Cordeau, J.-F.",
     t: "Scalable Multi-Stage Stochastic Optimization for Freight Procurement in Transportation-Inventory Systems",
-    v: "ijoc", st: "To appear", app: ["transport", "inventory"], m: ["unc", "algo"],
+    v: "ijoc", st: "To appear", app: ["prodinv", "transport"], dm: ["or"], m: ["unc", "algo"],
     l: [["Working paper", "https://www.gerad.ca/fr/papers/G-2022-19.pdf"]] },
   { y: 2026, type: "journal", a: "Wu, F., Adulyasak, Y., Cordeau, J.-F.",
     t: "The Routing-and-Driving Problem for Plug-in Hybrid Electric Vehicles",
-    v: "ijoc", st: "Online", app: ["routing", "ev"], m: ["algo"],
+    v: "ijoc", st: "Online", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1287/ijoc.2024.1016"], ["Working paper", "https://www.gerad.ca/en/papers/G-2024-73"]] },
   { y: 2026, type: "conference", a: "van Twiller, J., Adulyasak, Y., Delage, E., Grbic, D., Jensen, R.-M.",
     t: "Navigating Demand Uncertainty in Container Shipping: Deep Reinforcement Learning for Enabling Adaptive and Feasible Master Stowage Planning",
     v: "ecml", vt: "European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD 2026)",
-    st: "To appear", app: ["transport"], m: ["rl", "ml", "unc"],
+    st: "To appear", app: ["transport"], dm: ["or", "ml"], m: ["rl", "unc"],
     l: [["arXiv", "https://arxiv.org/abs/2502.12756"]] },
   { y: 2026, type: "journal", a: "Elyasi, M., Dems, A., Adulyasak, Y., Arslan, O., Cordeau, J.-F.",
     t: "The Technician Routing and Scheduling Problem with Skills and Time-Sensitive Returns under Uncertainty",
-    v: "trb", st: "To appear", app: ["routing"], m: ["unc"],
-    l: [["Working paper", "https://www.cirrelt.ca/documentstravail/cirrelt-2026-11.pdf"]] },
+    v: "trb", d: "214, 103601", app: ["transport"], dm: ["or"], m: ["unc"],
+    l: [["Paper", "https://doi.org/10.1016/j.trb.2026.103601"], ["Working paper", "https://www.cirrelt.ca/documentstravail/cirrelt-2026-11.pdf"]] },
   { y: 2026, type: "journal", a: "Jalal Osorio, A., Adulyasak, Y., Jans, R., Morabito, R., Toso, E.",
     t: "An Integrated Location-Inventory-Transportation Problem under Demand Uncertainty",
-    v: "tre", d: "213, 104990", app: ["network", "inventory"], m: ["unc"],
+    v: "tre", d: "213, 104990", app: ["prodinv", "network"], dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1016/j.tre.2026.104990"], ["Working paper", "https://www.gerad.ca/en/papers/G-2025-26"]] },
   { y: 2026, type: "journal", a: "Wang, E., Yang, L., Adulyasak, Y., Cordeau, J.-F., Gao, Z.",
     t: "Joint Rolling Stock and Crew Scheduling with Multi-train Composition in Urban Rail Networks",
-    v: "ts", d: "60(2), 177-365", app: ["transport"], m: ["algo"],
+    v: "ts", d: "60(2), 197–223", app: ["transport"], dm: ["or"], m: ["algo"],
     aw: [["2024 RAS Student Paper Competition, 2nd place (INFORMS)", "https://connect.informs.org/railway-applications/new-item3/student-paper-award816"]],
     l: [["Paper", "https://doi.org/10.1287/trsc.2024.0905"], ["Working paper", "https://chairelogistique.hec.ca/wp-content/uploads/2024/10/JRSCS.pdf"]] },
-  { y: 2026, type: "journal", a: "Nguyen, D.-T., Adulyasak, Y., Cordeau, J.-F., Khern-am-nuai, W.",
-    t: "Framework for Affinity-Based Personalized Review Recommendation",
-    v: "ecr", app: ["platforms"], m: ["ml"],
+  { y: 2026, type: "journal", a: "Nguyen, D.-T., Khern-am-nuai, W., Adulyasak, Y., Cordeau, J.-F.",
+    t: "A Framework for Affinity-Based Personalized Review Recommendation",
+    v: "ecr", app: ["platforms"], dm: ["ml"], m: ["unsup"],
     l: [["Paper", "https://doi.org/10.1007/s10660-026-10143-2"], ["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4156159"]] },
   { y: 2026, type: "journal", a: "Hosseini, S.-S., Adulyasak, Y., Rousseau, L.-M.",
     t: "Consistent Home Health Care Routing and Scheduling Problem Under Time Uncertainty",
-    v: "tre", d: "205, 104509", app: ["health", "routing"], m: ["unc"],
+    v: "tre", d: "205, 104509", app: ["transport", "health"], dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1016/j.tre.2025.104509"], ["Working paper", "https://www.gerad.ca/fr/papers/G-2023-45.pdf"]] },
   { y: 2026, type: "journal", a: "Avishan, F., Dems, A., Adulyasak, Y., Arslan, O., Cordeau, J.-F.",
     t: "Inventory Routing with Heterogeneous Vehicles and Hazardous Material Backhauling",
-    v: "tre", d: "205, 104491", app: ["inventory", "routing"], m: ["algo"],
+    v: "tre", d: "205, 104491", app: ["prodinv", "transport"], ind: true, dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1016/j.tre.2025.104491"], ["Working paper", "https://chairelogistique.hec.ca/wp-content/uploads/2024/11/IRHVB.pdf"]] },
   { y: 2026, type: "journal", a: "Wang, W., Adulyasak, Y., Cordeau, J.-F.",
     t: "Electric Vehicle Routing with Heterogeneous Charging Stations",
-    v: "cor", d: "189, 107374", app: ["routing", "ev"], m: ["algo"],
+    v: "cor", d: "189, 107374", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1016/j.cor.2025.107374"]] },
   { y: 2026, type: "journal", a: "Zhu, L., Adulyasak, Y., Rousseau, L.-M.",
     t: "Partial-Outsourcing Strategy for the Vehicle Routing Problem with Stochastic Demands",
-    v: "networks", d: "3, 266–288", app: ["routing"], m: ["unc"],
+    v: "networks", d: "87(3), 266–288", app: ["transport"], dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1002/net.70024"], ["Working paper", "https://www.gerad.ca/en/papers/G-2024-70"]] },
 
   /* ---------- 2025 ---------- */
   { y: 2025, type: "conference", a: "Tu, X., Adulyasak, Y., Akbarzadeh, N., Delage, E.",
     t: "Fair Resource Allocation in Weakly Coupled Markov Decision Processes",
-    v: "aistats", vt: "28th International Conference on Artificial Intelligence and Statistics (AISTATS)",
-    app: [], m: ["rl"],
+    v: "aistats", vt: "28th International Conference on Artificial Intelligence and Statistics (AISTATS)", d: "PMLR 258, 2341–2349",
+    app: ["fundamental"], dm: ["or", "ml"], m: ["rl"],
     aw: [["2025 CORS Student Paper Competition, 2nd place", "https://www.cors.ca/content/student-paper-competition"]],
     l: [["Paper", "https://proceedings.mlr.press/v258/tu25a.html"]] },
   { y: 2025, type: "conference", a: "Akbarzadeh, N., Adulyasak, Y., Delage, E.",
-    t: "Planning and Learning in Risk-Aware Restless Multi-Arm Bandit Problem",
-    v: "aistats", vt: "28th International Conference on Artificial Intelligence and Statistics (AISTATS)",
-    app: [], m: ["rl", "ml"],
+    t: "Planning and Learning in Risk-Aware Restless Multi-Arm Bandits",
+    v: "aistats", vt: "28th International Conference on Artificial Intelligence and Statistics (AISTATS)", d: "PMLR 258, 991–999",
+    app: ["fundamental"], dm: ["or", "ml"], m: ["rl"],
     l: [["Paper", "https://proceedings.mlr.press/v258/akbarzadeh25a.html"]] },
   { y: 2025, type: "journal", a: "Rahal, S., Arslan, O., Dems, A., Adulyasak, Y., Cordeau, J.-F.",
     t: "Facility Location with Modular Capacity under Demand Uncertainty: An Industrial Case Study",
-    v: "infor", d: "63(4), 593–623", app: ["network"], m: ["unc"], hl: ["case"],
+    v: "infor", d: "63(4), 593–623", app: ["network"], ind: true, dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1080/03155986.2025.2493994"], ["Working paper", "https://www.gerad.ca/en/papers/G-2023-15"]] },
   { y: 2025, type: "journal", a: "Metzker, P., Thevenin, S., Adulyasak, Y., Dolgui, A.",
     t: "Distributionally Robust Optimization for the Multi-Period Multi-Item Lot-Sizing Problems under Yield Uncertainty",
-    v: "tase", d: "22, 11731-11752", app: ["production", "inventory"], m: ["unc", "robust"],
+    v: "tase", d: "22, 11731–11752", app: ["prodinv"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1109/TASE.2025.3535945"], ["Working paper", "https://www.gerad.ca/en/papers/G-2024-12"]] },
   { y: 2025, type: "journal", a: "Wang, W., Adulyasak, Y., Cordeau, J.-F., He, G.",
     t: "The Heterogeneous-Fleet Electric Vehicle Routing Problem with Nonlinear Charging Functions",
-    v: "trc", d: "170, 104932", app: ["routing", "ev"], m: ["algo"],
+    v: "trc", d: "170, 104932", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1016/j.trc.2024.104932"], ["Working paper", "https://www.gerad.ca/en/papers/G-2024-01"]] },
 
   /* ---------- 2024 ---------- */
   { y: 2024, type: "journal", a: "Cheng, C., Adulyasak, Y., Rousseau, L.-M.",
     t: "Robust Drone Delivery with Weather Information",
-    v: "msom", d: "26(4), 1189-1585", app: ["drones", "routing"], m: ["unc", "robust"],
+    v: "msom", d: "26(4), 1402–1421", app: ["transport"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1287/msom.2022.0339"], ["Working paper", "http://www.optimization-online.org/DB_FILE/2020/07/7897.pdf"]] },
   { y: 2024, type: "journal", a: "Wu, F., Adulyasak, Y., Cordeau, J.-F.",
     t: "Modeling and Solving the Traveling Salesman Problem with Speed Optimization for a Plug-in Hybrid Electric Vehicle",
-    v: "ts", d: "58(3), 562-577", app: ["routing", "ev"], m: ["algo"],
+    v: "ts", d: "58(3), 562–577", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1287/trsc.2023.0247"], ["Working paper", "https://www.gerad.ca/fr/papers/G-2023-42"]] },
   { y: 2024, type: "journal", a: "Bayani, M., Rostami, B., Adulyasak, Y., Rousseau, L.-M.",
     t: "A Dual Bounding Framework Through Cost Splitting for Binary Quadratic Optimization",
-    v: "ijoc", d: "36(6), 1501-1521", app: [], m: ["algo"],
+    v: "ijoc", d: "36(6), 1501–1521", app: ["fundamental"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1287/ijoc.2021.0186"], ["Working paper", "https://www.gerad.ca/en/papers/G-2021-43"]] },
   { y: 2024, type: "journal", a: "Khern-am-nuai, W., So, H., Cohen, M., Adulyasak, Y.",
     t: "Selecting Cover Images for Restaurant Reviews: AI vs. Wisdom of the Crowd",
-    v: "msom", d: "26(4), 330-349", app: ["platforms"], m: ["ml", "emp"],
+    v: "msom", d: "26(1), 330–349", app: ["platforms"], dm: ["ml"], m: ["aiapp", "emp"],
     aw: [["Finalist, 2021 INFORMS Service Science Paper Awards", null]],
     l: [["Paper", "https://doi.org/10.1287/msom.2021.0531"], ["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3808667"]] },
   { y: 2024, type: "journal", a: "Xia, W., Mishra, J., Adulyasak, Y.",
     t: "Seaport Adaptation and Capacity Investments under Inter-port Competition and Climate-change Uncertainty",
-    v: "trd", d: "130, 104183", app: ["transport", "ev"], m: ["unc"],
+    v: "trd", d: "130, 104183", app: ["transport"], dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1016/j.trd.2024.104183"], ["Working paper", "https://drive.google.com/file/d/17i4KBLmUHmWJUZi-VwhahxWVWlioTylf/view?usp=sharing"]] },
   { y: 2024, type: "journal", a: "Mahéo, A., Belieres, S., Adulyasak, Y., Cordeau, J.-F.",
     t: "Unified Branch-and-Benders-Cut for Two-Stage Stochastic Mixed-Integer Programs",
-    v: "cor", d: "164, 106526", app: [], m: ["unc", "algo"],
+    v: "cor", d: "164, 106526", app: ["fundamental"], dm: ["or"], m: ["unc", "algo"],
     l: [["Paper", "https://doi.org/10.1016/j.cor.2023.106526"], ["Working paper", "https://www.gerad.ca/en/papers/G-2020-54"]] },
   { y: 2024, type: "journal", a: "Adulyasak, Y., Cohen, M., Khern-am-nuai, W., Krause, M.",
     t: "Retail Analytics in the New Normal: The Influence of Artificial Intelligence and the Covid-19 Pandemic",
-    v: "emr", d: "52(1), 268-280", app: ["forecast"], m: ["ml", "emp"],
+    v: "emr", d: "52(1), 268–280", app: ["demand"], ind: true, dm: ["ml"], m: ["aiapp", "emp"],
     l: [["Paper", "https://doi.org/10.1109/EMR.2023.3337415"], ["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4007401"]] },
   { y: 2024, type: "journal", a: "Cheng, C., Yu, Q., Adulyasak, Y., Rousseau, L.-M.",
     t: "Distributionally Robust Facility Location with Uncertain Facility Capacity and Customer Demand",
-    v: "omega", d: "122, 102959", app: ["network"], m: ["unc", "robust"],
+    v: "omega", d: "122, 102959", app: ["network"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1016/j.omega.2023.102959"], ["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3872515"]] },
   { y: 2024, type: "journal", a: "Sereshti, N., Adulyasak, Y., Jans, R.",
     t: "Managing Flexibility in Stochastic Multi-Level Lot Sizing Problem with Service Level Constraints",
-    v: "omega", d: "122, 102957", app: ["production", "inventory"], m: ["unc"],
+    v: "omega", d: "122, 102957", app: ["prodinv"], dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1016/j.omega.2023.102957"]] },
   { y: 2024, type: "journal", a: "Metzker, P., Thevenin, S., Adulyasak, Y., Dolgui, A.",
     t: "Adaptive Robust Optimization for Lot-Sizing under Yield Uncertainty",
-    v: "ejor", d: "313(12), 513-526", app: ["production", "inventory"], m: ["unc", "robust"],
+    v: "ejor", d: "313(2), 513–526", app: ["prodinv"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1016/j.ejor.2023.08.036"]] },
   { y: 2024, type: "journal", a: "Tanlamai, J., Khern-am-nuai, W., Adulyasak, Y.",
-    t: "Identifying Arbitrage Opportunities in Retail Markets with Predictive Analytics",
-    v: "aisoc", app: ["forecast", "platforms"], m: ["ml"],
+    t: "Identifying Arbitrage Opportunities in Retail Markets with Artificial Intelligence",
+    v: "aisoc", d: "39, 2615–2630", app: ["demand", "platforms"], dm: ["ml"], m: ["sup"],
     l: [["Paper", "https://doi.org/10.1007/s00146-023-01718-w"], ["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3764048"]] },
   { y: 2024, type: "journal", a: "Adulyasak, Y., Benomar, O., Chaouachi, A., Cohen, M., Khern-am-nuai, W.",
     t: "Using AI to Detect Panic Buying and Improve Products Distribution amid Pandemic",
-    v: "aisoc", app: ["forecast"], m: ["ml"],
+    v: "aisoc", d: "39(4), 2099–2128", app: ["demand"], ind: true, dm: ["ml"], m: ["aiapp"],
     l: [["Paper", "https://doi.org/10.1007/s00146-023-01654-9"], ["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3742121"]] },
 
   /* ---------- 2023 ---------- */
   { y: 2023, type: "journal", a: "Zhang, G., Jia, N., Zhu, N., He, L., Adulyasak, Y.",
-    t: "Humanitarian Relief Network Design by Two-stage Distributionally Robust Optimization",
-    v: "trb", d: "176, 102805", app: ["health", "network"], m: ["unc", "robust"],
+    t: "Humanitarian Transportation Network Design via Two-Stage Distributionally Robust Optimization",
+    v: "trb", d: "176, 102805", app: ["network", "health"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1016/j.trb.2023.102805"]] },
   { y: 2023, type: "journal", a: "Belieres, S., Adulyasak, Y., Cordeau, J.-F.",
     t: "Scheduling Multi-staged Jobs on Parallel Identical Machines and a Central Server with Sequence-dependent Setup Times: An Application to an Automated Kitchen",
-    v: "cor", d: "160, 106387", app: ["production"], m: ["algo"],
+    v: "cor", d: "160, 106387", app: ["prodinv"], ind: true, dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1016/j.cor.2023.106387"], ["Working paper", "https://chairelogistique.hec.ca/wp-content/uploads/2022/10/robotic.pdf"]] },
   { y: 2023, type: "journal", a: "Dodin, P., Xiao, J., Adulyasak, Y., Etebari Alamdari, N., Gauthier, L., Grangier, P., Lemaitre, P., Hamilton, W. L.",
     t: "Bombardier Aftermarket Demand Forecast with Machine Learning",
-    v: "ijaa", d: "53(6), 389-465", app: ["forecast"], m: ["ml"], hl: ["case"],
+    v: "ijaa", d: "53(6), 425–445", app: ["demand"], ind: true, dm: ["ml"], m: ["sup"],
     l: [["Paper", "https://doi.org/10.1287/inte.2023.1164"], ["Working paper", "https://ssrn.com/abstract=3957452"]] },
-  { y: 2023, type: "journal", a: "Zhang, G., Zhu, N., Ma, S., Adulyasak, Y.",
-    t: "Robust Drone Selective Routing Problem in Humanitarian Transportation Network Assessment",
-    v: "ejor", d: "305(1), 400-428", app: ["drones", "routing", "health"], m: ["unc", "robust"],
+  { y: 2023, type: "journal", a: "Zhang, G., Jia, N., Zhu, N., Adulyasak, Y., Ma, S.",
+    t: "Robust Drone Selective Routing in Humanitarian Transportation Network Assessment",
+    v: "ejor", d: "305(1), 400–428", app: ["transport", "health"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1016/j.ejor.2022.05.046"]] },
   { y: 2023, type: "journal", a: "Metzker, P., Thevenin, S., Adulyasak, Y., Dolgui, A.",
     t: "Robust Optimization for Lot-Sizing Problems under Yield Uncertainty",
-    v: "cor", d: "149, 106025", app: ["production", "inventory"], m: ["unc", "robust"],
+    v: "cor", d: "149, 106025", app: ["prodinv"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1016/j.cor.2022.106025"]] },
 
   /* ---------- 2022 ---------- */
   { y: 2022, type: "journal", a: "Wu, L., Adulyasak, Y., Cordeau, J.-F., Wang, S.",
     t: "Vessel Service Planning in Seaports",
-    v: "or", d: "70(4), 2032-2053", app: ["transport"], m: ["algo"],
+    v: "or", d: "70(4), 2032–2053", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://pubsonline.informs.org/doi/abs/10.1287/opre.2021.2228"], ["Code", "https://github.com/LingxiaoWu2021/VSPP"]] },
   { y: 2022, type: "journal", a: "Thevenin, S., Adulyasak, Y., Cordeau, J.-F.",
-    t: "Stochastic Dual Dynamic Programming for Multi-Echelon Lot-sizing with Component Substitution",
-    v: "ijoc", d: "34(6), 3151-3169", app: ["production", "inventory"], m: ["unc", "algo"],
+    t: "Stochastic Dual Dynamic Programming for Multiechelon Lot Sizing with Component Substitution",
+    v: "ijoc", d: "34(6), 3151–3169", app: ["prodinv"], dm: ["or"], m: ["unc", "algo"],
     l: [["Paper", "https://pubsonline.informs.org/doi/10.1287/ijoc.2022.1215"], ["Code", "https://github.com/StochasticLotSizing/IJOC_SDDP_for_Multi-Echelon_Lot-Sizing_with_Component_Substitution"]] },
   { y: 2022, type: "journal", a: "Martinez, K., Adulyasak, Y., Jans, R.",
-    t: "Logic-Based Benders Reformulations for Integrated Process Configuration and Production Planning Problems",
-    v: "ijoc", d: "34(4), 2177-2191", app: ["production"], m: ["algo"],
+    t: "Logic-Based Benders Decomposition for Integrated Process Configuration and Production Planning Problems",
+    v: "ijoc", d: "34(4), 2177–2191", app: ["prodinv"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1287/ijoc.2021.1079"]] },
   { y: 2022, type: "journal", a: "Yu, Q., Adulyasak, Y., Rousseau, L.-M., Zhu, N., Ma, S.",
     t: "Team Orienteering with Time-Varying Profit",
-    v: "ijoc", d: "34(1), 262-280", app: ["routing"], m: ["algo"],
+    v: "ijoc", d: "34(1), 262–280", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://doi.org/10.1287/ijoc.2020.1026"], ["Instances", "https://github.com/QinxiaoYu/TOPTTP"]] },
   { y: 2022, type: "journal", a: "Nguyen, D.-T., Adulyasak, Y., Cordeau, J.-F., Ponce, S.",
     t: "Data-Driven Operations and Supply Chain Management: Established Research Clusters from 2000 to early 2020",
-    v: "ijpr", d: "60(17), 5407-5431", app: [], m: ["emp"],
+    v: "ijpr", d: "60(17), 5407–5431", app: ["fundamental"], dm: ["or"], m: ["emp"],
     l: [["Paper", "https://doi.org/10.1080/00207543.2021.1956695"], ["Supplement", "https://docs.google.com/uc?id=1nI1sIfCOayloYeF1m9g4VvWGwRFt49RW&export=download&hl=en"]] },
 
   /* ---------- 2021 ---------- */
   { y: 2021, type: "journal", a: "Thevenin, S., Adulyasak, Y., Cordeau, J.-F.",
     t: "Material Requirements Planning Under Demand Uncertainty Using Stochastic Optimization",
-    v: "pom", d: "30(2), 475-493", app: ["production", "inventory"], m: ["unc"],
+    v: "pom", d: "30(2), 475–493", app: ["prodinv"], dm: ["or"], m: ["unc"],
     l: [["Paper", "https://doi.org/10.1111/poms.13277"], ["Supplement", "https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1111%2Fpoms.13277&file=poms13277-sup-0001-Supplement.pdf"], ["Code", "https://github.com/StochasticLotSizing/StochasticMRP"]] },
   { y: 2021, type: "journal", a: "Cheng, C., Adulyasak, Y., Rousseau, L.-M.",
     t: "Robust Facility Location under Disruptions",
-    v: "ijoo", d: "3(3), 298-314", app: ["network"], m: ["unc", "robust"],
+    v: "ijoo", d: "3(3), 298–314", app: ["network"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://pubsonline.informs.org/doi/10.1287/ijoo.2021.0054"]] },
   { y: 2021, type: "journal", a: "Sereshti, N., Adulyasak, Y., Jans, R.",
-    t: "The Value of Aggregate Service Levels in Stochastic Lot Sizing Problem",
-    v: "omega", d: "102, 102335", app: ["production", "inventory"], m: ["unc"],
+    t: "The Value of Aggregate Service Levels in Stochastic Lot Sizing Problems",
+    v: "omega", d: "102, 102335", app: ["prodinv"], dm: ["or"], m: ["unc"],
     aw: [["Omega Best Paper Award 2021", null]],
     l: [["Paper", "https://doi.org/10.1016/j.omega.2020.102335"]] },
   { y: 2021, type: "journal", a: "Hoogeboom, M., Adulyasak, Y., Dullaert, W., Jaillet, P.",
     t: "The Robust Vehicle Routing Problem with Time Window Assignments",
-    v: "ts", d: "55(2), 275-552", app: ["routing"], m: ["unc", "robust"],
+    v: "ts", d: "55(2), 395–413", app: ["transport"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1287/trsc.2020.1013"]] },
   { y: 2021, type: "journal", a: "Cheng, C., Adulyasak, Y., Rousseau, L.-M.",
     t: "Robust Facility Location Under Demand Uncertainty and Facility Disruptions",
-    v: "omega", d: "103, 102429", app: ["network"], m: ["unc", "robust"],
+    v: "omega", d: "103, 102429", app: ["network"], dm: ["or"], m: ["unc", "robust"],
     l: [["Paper", "https://doi.org/10.1016/j.omega.2021.102429"]] },
   { y: 2021, type: "journal", a: "Nguyen, D.-T., Adulyasak, Y., Landry, S.",
     t: "Bullwhip Effect in Rule-Based Supply Chain Planning Systems: A Case-Based Simulation at a Hard Goods Retailer",
-    v: "omega", d: "98, 102121", app: ["inventory", "forecast"], m: ["emp"], hl: ["case"],
+    v: "omega", d: "98, 102121", app: ["prodinv", "demand"], ind: true, dm: ["or"], m: ["emp"],
     l: [["Paper", "https://doi.org/10.1016/j.omega.2019.102121"]] },
 
   /* ---------- 2020 and earlier ---------- */
   { y: 2020, type: "journal", a: "Yarkony, J., Adulyasak, Y., Singh, M., Desaulniers, G.",
     t: "Data Association via Set Packing for Computer Vision Applications",
-    v: "ijoo", d: "2(3), 145-228", app: [], m: ["algo", "ml"],
+    v: "ijoo", d: "2(3), 167–191", app: ["fundamental"], dm: ["or", "ml"], m: ["algo", "aiapp"],
     l: [["Paper", "https://pubsonline.informs.org/doi/10.1287/ijoo.2019.0030"]] },
   { y: 2020, type: "journal", a: "Cheng, C., Adulyasak, Y., Rousseau, L.-M.",
     t: "Drone Routing with Energy Function: Formulation and Exact Algorithm",
-    v: "trb", d: "139, 364-387", app: ["drones", "routing"], m: ["algo"],
+    v: "trb", d: "139, 364–387", app: ["transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://www.sciencedirect.com/science/article/abs/pii/S019126152030360X"]] },
   { y: 2019, type: "journal", a: "Martinez, K., Adulyasak, Y., Jans, R., Morabito, R., Toso, E.A.V.",
     t: "An Exact Optimization Approach for an Integrated Process Configuration, Lot-Sizing and Scheduling Problem",
-    v: "cor", d: "103, 310-323", app: ["production"], m: ["algo"],
+    v: "cor", d: "103, 310–323", app: ["prodinv"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://www.sciencedirect.com/science/article/pii/S0305054818302582"]] },
   { y: 2018, type: "conference", a: "Deudon, M., Cournut, P., Lacoste, A., Adulyasak, Y., Rousseau, L.-M.",
     t: "Learning Heuristics for the TSP by Policy Gradient",
-    v: "cpaior", d: "Lecture Notes in Computer Science, vol. 10848", app: ["routing"], m: ["ml", "rl"],
+    v: "cpaior", d: "Lecture Notes in Computer Science, vol. 10848, 170–181", app: ["transport"], dm: ["or", "ml"], m: ["rl"],
     l: [["Paper", "https://doi.org/10.1007/978-3-319-93031-2_12"], ["Code", "https://framagit.org/MichelDeudon/encode-attend-navigate"]] },
   { y: 2017, type: "journal", a: "Ahmed, A., Varakantham, P., Lowalekar, M., Adulyasak, Y., Jaillet, P.",
-    t: "Sampling Based Approaches for Minimizing Regret in Uncertain Markov Decision Problems (MDPs)",
-    v: "jair", d: "59, 229-264", app: [], m: ["rl", "unc"],
+    t: "Sampling Based Approaches for Minimizing Regret in Uncertain Markov Decision Processes (MDPs)",
+    v: "jair", d: "59, 229–264", app: ["fundamental"], dm: ["or", "ml"], m: ["rl", "unc"],
     l: [["Paper", "https://www.jair.org/index.php/jair/article/view/11066"]] },
   { y: 2017, type: "journal", a: "Ghosh, S., Varakantham, P., Adulyasak, Y., Jaillet, P.",
-    t: "Dynamic Redeployment to Reduce Lost Demand in Bike Sharing Systems",
-    v: "jair", d: "58, 387-430", app: ["routing"], m: ["unc", "algo"],
+    t: "Dynamic Repositioning to Reduce Lost Demand in Bike Sharing Systems",
+    v: "jair", d: "58, 387–430", app: ["transport"], dm: ["or"], m: ["unc", "algo"],
     l: [["Paper", "https://jair.org/index.php/jair/article/view/11048"]] },
   { y: 2016, type: "journal", a: "Adulyasak, Y., Jaillet, P.",
     t: "Models and Algorithms for Stochastic and Robust Vehicle Routing with Deadlines",
-    v: "ts", d: "50(2), 608-626", app: ["routing"], m: ["unc", "robust", "algo"],
+    v: "ts", d: "50(2), 608–626", app: ["transport"], dm: ["or"], m: ["unc", "robust", "algo"],
     l: [["Paper", "https://pubsonline.informs.org/doi/abs/10.1287/trsc.2014.0581"], ["Supplement", "https://pubsonline.informs.org/doi/suppl/10.1287/trsc.2014.0581/suppl_file/trsc.2014.0581-sm_supplement_%2825-jun-2015%29_final.pdf"]] },
   { y: 2015, type: "journal", a: "Adulyasak, Y., Cordeau, J.-F., Jans, R.",
     t: "Benders Decomposition for Production Routing under Demand Uncertainty",
-    v: "or", d: "63(4), 851-867", app: ["production", "routing", "inventory"], m: ["unc", "algo"],
+    v: "or", d: "63(4), 851–867", app: ["prodinv", "transport"], dm: ["or"], m: ["unc", "algo"],
     l: [["Paper", "https://pubsonline.informs.org/doi/abs/10.1287/opre.2015.1401"], ["Supplement", "https://pubsonline.informs.org/doi/suppl/10.1287/opre.2015.1401/suppl_file/opre.2015.1401-sm.pdf"]] },
   { y: 2015, type: "conference", a: "Ghosh, S., Varakantham, P., Adulyasak, Y., Jaillet, P.",
     t: "Dynamic Redeployment to Counter Congestion or Starvation in Vehicle Sharing Systems",
     v: "icaps", vt: "25th International Conference on Automated Planning and Scheduling (ICAPS)",
-    app: ["routing"], m: ["unc", "algo"],
+    app: ["transport"], dm: ["or"], m: ["unc", "algo"],
     l: [["Paper", "https://dspace.mit.edu/handle/1721.1/100439"]] },
   { y: 2015, type: "conference", a: "Adulyasak, Y., Varakantham, P., Jaillet, P.",
     t: "Solving Uncertain MDPs with Objectives that are Separable over Instantiations of Model Uncertainty",
     v: "aaai", vt: "29th AAAI Conference on Artificial Intelligence (AAAI)",
-    app: [], m: ["rl", "unc"],
+    app: ["fundamental"], dm: ["or", "ml"], m: ["rl", "unc"],
     l: [["Paper", "https://web.mit.edu/jaillet/www/general/sep-obj-aaai-15.pdf"]] },
   { y: 2015, type: "journal", a: "Adulyasak, Y., Cordeau, J.-F., Jans, R.",
     t: "The Production Routing Problem: A Review of Formulations and Solution Algorithms",
-    v: "cor", d: "55, 141-152", app: ["production", "routing", "inventory"], m: ["algo"],
+    v: "cor", d: "55, 141–152", app: ["prodinv", "transport"], dm: ["or"], m: ["algo"],
     l: [["Paper", "https://www.sciencedirect.com/science/article/pii/S0305054814000240"]] },
   { y: 2014, type: "journal", a: "Adulyasak, Y., Cordeau, J.-F., Jans, R.",
     t: "Formulations and Branch-and-Cut Algorithms for Multivehicle Production and Inventory Routing Problems",
-    v: "ijoc", d: "26(1), 103-120", app: ["production", "routing", "inventory"], m: ["algo"],
-    l: [["Paper", "https://doi.org/10.1287/ijoc.2013.0550"], ["Supplement", "https://pubsonline.informs.org/doi/suppl/10.1287/ijoc.2013.0550/suppl_file/ijoc.2013.0550-sm.pdf"], ["Instances", "https://github.com/y-adulyasak/PRP_IRP_instances"]] },
+    v: "ijoc", d: "26(1), 103–120", app: ["prodinv", "transport"], dm: ["or"], m: ["algo"],
+    l: [["Paper", "https://doi.org/10.1287/ijoc.2013.0550"], ["Supplement", "https://pubsonline.informs.org/doi/suppl/10.1287/ijoc.2013.0550/suppl_file/ijoc.2013.0550-sm.pdf"], ["MVPRP instances", "https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/MVPRP"], ["MVIRP instances", "https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/MVIRP"]] },
   { y: 2014, type: "journal", a: "Adulyasak, Y., Cordeau, J.-F., Jans, R.",
     t: "Optimization-Based Adaptive Large Neighborhood Search for the Production Routing Problem",
-    v: "ts", d: "48(1), 20-45", app: ["production", "routing", "inventory"], m: ["algo"],
-    l: [["Paper", "https://pubsonline.informs.org/doi/abs/10.1287/trsc.1120.0443"], ["Instances", "https://github.com/y-adulyasak/PRP_IRP_instances"]] },
+    v: "ts", d: "48(1), 20–45", app: ["prodinv", "transport"], dm: ["or"], m: ["algo"],
+    l: [["Paper", "https://pubsonline.informs.org/doi/abs/10.1287/trsc.1120.0443"], ["Instance set A", "https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/PRP_Set_A"], ["Instance set B", "https://github.com/y-adulyasak/PRP_IRP_instances/tree/main/PRP_Set_B"]] },
   { y: 2014, type: "conference", a: "Varakantham, P., Adulyasak, Y., Jaillet, P.",
     t: "Decentralized Stochastic Planning with Anonymity in Interactions",
     v: "aaai", vt: "28th AAAI Conference on Artificial Intelligence (AAAI)",
-    app: [], m: ["rl", "unc"],
+    app: ["fundamental"], dm: ["or", "ml"], m: ["rl", "unc"],
     l: [["Paper", "https://web.mit.edu/jaillet/www/general/aaai14-978.pdf"]] },
   { y: 2013, type: "conference", a: "Ahmed, A., Varakantham, P., Adulyasak, Y., Jaillet, P.",
     t: "Regret Based Robust Solutions for Uncertain Markov Decision Processes",
-    v: "neurips", d: "26", app: [], m: ["rl", "unc", "robust"],
+    v: "neurips", d: "26", app: ["fundamental"], dm: ["or", "ml"], m: ["rl", "unc", "robust"],
     l: [["Paper", "https://papers.nips.cc/paper/4970-regret-based-robust-solutions-for-uncertain-markov-decision-processes"]] },
 
   /* ---------- Under review and submitted ---------- */
   { type: "wp", a: "Thevenin, S., Adulyasak, Y., Prescott-Gagnon, E., Moisan, T.",
     t: "Multi-Item Inventory Replenishment Planning for Intermittent Demand Using Stochastic Optimization",
-    st: "Under revision at Production and Operations Management", app: ["inventory"], m: ["unc"],
+    st: "Under revision at Production and Operations Management", app: ["prodinv"], dm: ["or"], m: ["unc"],
     l: [["Working paper", "https://www.gerad.ca/en/papers/G-2024-03"]] },
   { type: "wp", a: "Tanlamai, J., Khern-am-nuai, W., Kar, W., Adulyasak, Y.",
     t: "The Implications of Generic Responses in Online Customer Service Operations",
-    st: "Under revision at Production and Operations Management", app: ["platforms"], m: ["emp"],
+    st: "Under revision at Production and Operations Management", app: ["platforms"], dm: [], m: ["emp"],
     l: [["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4589792"]] },
   { type: "wp", a: "Wang, E., Yang, L., Adulyasak, Y., Cordeau, J.-F., Gao, Z.",
     t: "Urban Rail Rolling Stock Scheduling with Short-Turn Operations and Passenger Flow Management",
-    st: "Under revision at Operations Research", app: ["transport"], m: [] },
+    st: "Under revision at Operations Research", app: ["transport"], dm: ["or"], m: [] },
   { type: "wp", a: "Martinez, K., Adulyasak, Y., Jans, R.",
     t: "Stochastic Optimization for Template Design Problem",
-    st: "Under revision at INFORMS Journal on Computing", app: ["production"], m: ["unc"],
+    st: "Under revision at INFORMS Journal on Computing", app: ["prodinv"], dm: ["or"], m: ["unc"],
     l: [["Working paper", "https://drive.google.com/file/d/16C1ErUDh4XU_uq9SUpeznC0X_thdGObC/view?usp=sharing"]] },
   { type: "wp", a: "Yoo, C., Khern-am-nuai, W., Tanlamai, J., Adulyasak, Y.",
     t: "From Fear to Fury: The Behavioral Trade-offs of Removing Negative Feedback Option in Online Discussion Platforms",
-    st: "Submitted", app: ["platforms"], m: ["emp"],
+    st: "Submitted", app: ["platforms"], dm: [], m: ["emp"],
     l: [["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6529459"]] },
   { type: "wp", a: "Ghaniabadi, M., Adulyasak, Y., Fleischmann, M., Jans, R.",
     t: "A Newsvendor Problem with Holding Costs in a Multi-Stage Supply Chain",
-    st: "Submitted", app: ["inventory"], m: ["unc"] },
+    st: "Submitted", app: ["prodinv"], dm: ["or"], m: ["unc"] },
   { type: "wp", a: "Bayani, M., Adulyasak, Y., Rousseau, L.-M.",
     t: "Learning and Modeling Implicit Constraints in Optimization Models through Decision Trees",
-    st: "Submitted", app: [], m: ["ml"],
+    st: "Submitted", app: ["fundamental"], dm: ["or", "ml"], m: ["sup"],
     l: [["Working paper", "https://www.gerad.ca/fr/papers/G-2024-78.pdf"]] },
   { type: "wp", a: "Akbarzadeh, N., Adulyasak, Y., Delage, E.",
     t: "Risk-Aware Decision Making in Restless Bandits: Theory and Algorithms for Planning and Learning",
-    st: "Submitted", app: [], m: ["rl", "ml"],
+    st: "Submitted", app: ["fundamental"], dm: ["or", "ml"], m: ["rl"],
     l: [["arXiv", "https://arxiv.org/abs/2410.23029"]] },
   { type: "wp", a: "Wang, W., Dems, A., Adulyasak, Y., Arslan, O., Cordeau, J.-F.",
     t: "Electric Vehicle Fast-Charging Facility Location with Endogenous Queuing in Path Selection",
-    st: "Submitted", app: ["ev", "network"], m: [],
+    st: "Submitted", app: ["transport", "network"], dm: ["or"], m: [],
     l: [["Working paper", "https://www.gerad.ca/en/papers/G-2026-11"]] },
   { type: "wp", a: "Wu, L., Mendoza, J. E., Adulyasak, Y., Cordeau, J.-F.",
     t: "Fleet and Infrastructure Planning for Heavy-Duty Electric Vehicles with Opportunity Charging",
-    st: "Submitted", app: ["ev", "routing", "network"], m: [],
+    st: "Submitted", app: ["transport", "network"], dm: ["or"], m: [],
     l: [["Working paper", "https://www.gerad.ca/en/papers/G-2026-38"]] },
   { type: "wp", a: "Wu, L., Adulyasak, Y., Cordeau, J.-F., Yan, R.",
     t: "Stochastic Berthing Appointment Scheduling in Seaports",
-    st: "Submitted", app: ["transport"], m: ["unc"] },
+    st: "Submitted", app: ["transport"], dm: ["or"], m: ["unc"] },
   { type: "wp", a: "Jin, Z., Wang, Z., Wu, L., Adulyasak, Y., Xue, W.",
     t: "Airline Service Design with Electric Aircraft",
-    st: "Submitted", app: ["transport", "ev"], m: [],
+    st: "Submitted", app: ["transport"], dm: ["or"], m: [],
     l: [["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6586258"]] },
   { type: "wp", a: "Chen, X., Adulyasak, Y., Cordeau, J.-F.",
     t: "Bayesian Learning of Demand and Stockout-Based Substitution for Risk-Aware Inventory Optimization",
-    st: "Submitted", app: ["inventory", "forecast"], m: ["ml", "unc"],
+    st: "Submitted", app: ["prodinv", "demand"], dm: ["or", "ml"], m: ["sup", "unc"],
     l: [["Working paper", "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7444520"]] },
 
   /* ---------- Teaching cases ---------- */
   { y: 2023, type: "case", a: "Rancourt, M.-È., Dufour, É., Silvestri, S., Adulyasak, Y.",
     t: "The Kampala Alternative: Optimizing the Humanitarian Supply Chain in East Africa",
-    v: "ricg", d: "21(4), 1-7", app: ["health"], m: [], hl: ["case"],
+    v: "ricg", d: "21(4), 1–7", app: ["health"], dm: ["or"], m: [],
     aw: [["Best Business Case Award 2024, HEC Montréal", "https://www.hec.ca/en/news/2024/research-teaching-awardss.html"]],
     l: [["Case", "https://education.hec.ca/centredecas/app/fr/case-detail?id=9343&titleLang=en"]] },
   { y: 2021, type: "case", a: "Nguyen, D.-T., Adulyasak, Y., Landry, S., Roy, J., Beaulieu, M.",
     t: "Princess Auto: Changing the Supply Chain Management Landscape with Flowcasting",
-    v: "ricg", d: "19(4), 1-18", app: ["forecast", "inventory"], m: [], hl: ["case"],
+    v: "ricg", d: "19(4), 1–18", app: ["prodinv", "demand"], dm: ["or"], m: [],
     l: [["Harvard Business Publishing", "https://store.hbr.org/product/princess-auto-a-changing-the-supply-chain-management-landscape-with-flowcasting/HEC297"]] },
 
   /* ---------- Patents ---------- */
   { type: "patent", a: "Yarkony, J., Adulyasak, Y., Singh, M. K., Desaulniers, G.",
     t: "Computer Vision Systems and Methods for Machine Learning Using a Set Packing Framework",
-    d: "US Patent Application 16/870,492", app: [], m: ["ml", "algo"] },
+    d: "US Patent Application 16/870,492", app: ["fundamental"], dm: ["or", "ml"], m: ["aiapp", "algo"] },
   { type: "patent", a: "Adulyasak, Y., Cordeau, J.-F., Prescott-Gagnon, E., Raymond, V., Thevenin, S.",
     t: "System and Method of Calculating Order Policy for Production Planning with Stochastic Demand",
-    d: "US Patent Application", app: ["production", "inventory"], m: ["unc"] },
+    d: "US Patent Application", app: ["prodinv"], dm: ["or"], m: ["unc"] },
   { type: "patent", a: "Moison, T., Prescott-Gagnon, E., Adulyasak, Y.",
     t: "Use of Markov Chain to Assess the Quality of a (s, S) Inventory Policy",
-    d: "US Patent Application", app: ["inventory"], m: [] },
+    d: "US Patent Application", app: ["prodinv"], dm: ["or"], m: [] },
   { type: "patent", a: "Adulyasak, Y., Moison, T., Prescott-Gagnon, E.",
     t: "A Distribution-Independent Inventory Optimization Approach under Multiple Service Level Targets",
-    d: "US Patent 10,977,609", app: ["inventory"], m: [] },
+    d: "US Patent 10,977,609", app: ["prodinv"], dm: ["or"], m: [] },
   { type: "patent", a: "Adulyasak, Y., Vallée, J., Hudon, C., Lewis, G.",
     t: "An Attribute-Based Data Analytics Framework for Transferable Demand Analysis",
-    d: "US Patent Application", app: ["forecast"], m: [] },
+    d: "US Patent Application", app: ["demand"], dm: ["ml"], m: [] },
 
   /* ---------- Thesis and reports ---------- */
   { y: 2013, type: "other", a: "Desrosiers, J., Jans, R., Adulyasak, Y.",
     t: "Improved Column Generation Algorithms for Clustering Problems",
-    vt: "GERAD Technical Report", d: "G-2013-26", app: [], m: ["algo"],
+    vt: "GERAD Technical Report", d: "G-2013-26", app: ["fundamental"], dm: ["or"], m: ["algo"],
     l: [["Report", "https://www.gerad.ca/en/papers/G-2013-26"]] },
   { y: 2012, type: "other", a: "Adulyasak, Y.",
     t: "Models and Solution Algorithms for Production Routing Problems",
-    vt: "PhD thesis, HEC Montréal", app: ["production", "routing", "inventory"], m: ["algo"],
+    vt: "PhD thesis, HEC Montréal", app: ["prodinv", "transport"], dm: ["or"], m: ["algo"],
     aw: [["Mercure Award for the Best Doctoral Thesis, HEC Montréal (2013)", "http://www.hec.ca/en/news/2014/2013_best_doctoral_thesis.html"]],
     l: [["Thesis", "https://docs.google.com/uc?id=0B4094T3MMfkAd0h3ZFgtM05Xajg&export=download&hl=en"]] }
 ];
@@ -826,14 +919,13 @@ const PUBS = [
    ===================================================================== */
 (function () {
   const ME = /Adulyasak,\s*Y\./g;
-  const GROUP_ORDER = ["app", "method", "venue", "type", "hl"];
+  const GROUP_ORDER = ["app", "dom", "method", "type", "venue"];
   const NAMED_GROUPS = {
     wp: "Under review and submitted",
     case: "Teaching cases",
     patent: "Patents",
     other: "Thesis and technical reports"
   };
-  const VENUE_LIMIT = 10;
 
   const norm = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const esc = s => String(s == null ? "" : s)
@@ -843,37 +935,40 @@ const PUBS = [
   PUBS.forEach((p, i) => {
     p._i = i;
     p.app = p.app || [];
+    p.dm = p.dm || [];
     p.m = p.m || [];
     p.l = p.l || [];
-    const hl = new Set(p.hl || []);
-    if (p.aw && p.aw.length) hl.add("award");
-    if (p.l.some(([lab]) => /^(code|instances)/i.test(lab))) hl.add("code");
-    p._hl = [...hl];
     const V = p.v ? VENUES[p.v] : null;
+    const published = p.type === "journal" || p.type === "conference";
+    p._hl = (published && V) ? Object.keys(HIGHLIGHTS).filter(k => V[k]) : [];
     p._s = norm([
       p.t, p.a, p.vt, V && V.f, V && V.s, p.d, p.st, p.y,
       p.app.map(k => APPS[k] && APPS[k][0]).join(" "),
+      p.dm.map(k => DOMAINS[k] && DOMAINS[k][0]).join(" "),
       p.m.map(k => METHODS[k]).join(" "),
+      p._hl.map(k => HIGHLIGHTS[k][0]).join(" "),
+      p.ind ? "industrial collaboration industry" : "",
       (p.aw || []).map(x => x[0]).join(" ")
     ].join(" "));
   });
 
   const GET = {
     app: p => p.app,
+    dom: p => p.dm,
     method: p => p.m,
-    venue: p => (p.v ? [p.v] : []),
-    type: p => [p.type],
-    hl: p => p._hl
+    // a paper matches its own venue and any venue group (@utd, @ft, @top) it belongs to
+    venue: p => (p.v ? [p.v] : []).concat(p._hl.map(k => "@" + k)),
+    type: p => p.ind ? [p.type, "industry"] : [p.type],
   };
   const LABEL = {
     app: k => APPS[k][0],
+    dom: k => DOMAINS[k][0],
     method: k => METHODS[k],
-    venue: k => VENUES[k].s,
+    venue: k => k.charAt(0) === "@" ? HIGHLIGHTS[k.slice(1)][0] : VENUES[k].s,
     type: k => TYPES[k],
-    hl: k => HIGHLIGHTS[k]
   };
 
-  const sel = { app: new Set(), method: new Set(), venue: new Set(), type: new Set(), hl: new Set() };
+  const sel = { app: new Set(), dom: new Set(), method: new Set(), venue: new Set(), type: new Set() };
   let query = "";
   let venueExpanded = false;
 
@@ -909,24 +1004,26 @@ const PUBS = [
   $("lede").textContent =
     PUBS.length + " works on supply chain analytics, optimization under uncertainty and AI: " +
     nPeer + " peer-reviewed papers, " + nWp + " under review, " + nPat + " patents and " + nCase +
-    " teaching cases. Pick a problem, method or venue to narrow the list.";
+    " teaching cases. Browse by application or methodological domain, or narrow by method, type, venue and highlights.";
   $("updated").textContent = "List updated " + UPDATED + ".";
 
-  // Problems
-  const pg = $("problem-grid");
-  Object.keys(APPS)
-    .sort((a, b) => total("app", b) - total("app", a))
-    .forEach(k => {
+  // Application and domain tiles (shown in the order defined in APPS / DOMAINS)
+  function makeTiles(containerId, g, dict) {
+    const c = $(containerId);
+    Object.keys(dict).forEach(k => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "problem";
-      b.dataset.g = "app";
+      b.dataset.g = g;
       b.dataset.v = k;
-      b.title = APPS[k][1];
+      b.title = dict[k][1];
       b.setAttribute("aria-pressed", "false");
-      b.innerHTML = '<span class="p-name">' + esc(APPS[k][0]) + '</span><span class="p-count"></span>';
-      pg.appendChild(b);
+      b.innerHTML = '<span class="p-name">' + esc(dict[k][0]) + '</span><span class="p-count"></span>';
+      c.appendChild(b);
     });
+  }
+  makeTiles("problem-grid", "app", APPS);
+  makeTiles("domain-grid", "dom", DOMAINS);
 
   function makeChips(containerId, g, keys, cls) {
     const c = $(containerId);
@@ -936,19 +1033,18 @@ const PUBS = [
       b.className = "chip " + cls;
       b.dataset.g = g;
       b.dataset.v = k;
-      if (g === "venue") b.title = VENUES[k].f;
+      if (g === "venue") b.title = k.charAt(0) === "@" ? HIGHLIGHTS[k.slice(1)][1] : VENUES[k].f;
       b.setAttribute("aria-pressed", "false");
       b.innerHTML = '<span class="lab">' + esc(LABEL[g](k)) + '</span><span class="n"></span>';
       c.appendChild(b);
     });
   }
-  makeChips("chips-method", "method", Object.keys(METHODS).sort((a, b) => total("method", b) - total("method", a)), "chip-method");
+  makeChips("chips-method", "method", Object.keys(METHODS).filter(k => total("method", k) > 0), "chip-method");
   const venueKeys = Object.keys(VENUES)
-    .filter(k => total("venue", k) > 0)
-    .sort((a, b) => total("venue", b) - total("venue", a) || VENUES[a].s.localeCompare(VENUES[b].s));
+    .filter(k => total("venue", k) > 0);
   makeChips("chips-venue", "venue", venueKeys, "chip-venue");
   makeChips("chips-type", "type", Object.keys(TYPES).filter(k => total("type", k) > 0), "chip-type");
-  makeChips("chips-hl", "hl", Object.keys(HIGHLIGHTS), "chip-hl");
+  makeChips("chips-vset", "venue", Object.keys(HIGHLIGHTS).map(k => "@" + k), "chip-hl");
 
   // ---------- Rendering ----------
   const STAR = '<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg>';
@@ -973,6 +1069,16 @@ const PUBS = [
       if (p.type === "wp") line += (line ? ". " : "") + '<span class="status-text">' + esc(p.st) + '</span>';
       else line += '<span class="status">' + esc(p.st) + '</span>';
     }
+    p._hl.forEach(k => {
+      const on = sel.venue.has("@" + k);
+      line += '<button type="button" class="hlb' + (on ? " on" : "") + '" data-g="venue" data-v="@' + k + '" aria-pressed="' + on +
+        '" title="' + esc(HIGHLIGHTS[k][1]) + '">' + esc(k === "ai" ? "ML/AI" : HIGHLIGHTS[k][0]) + '</button>';
+    });
+    if (p.ind) {
+      const on = sel.type.has("industry");
+      line += '<button type="button" class="hlb hlb-ind' + (on ? " on" : "") + '" data-g="type" data-v="industry" aria-pressed="' + on +
+        '" title="Industrial collaboration">Industry</button>';
+    }
     if (line) h += '<p class="pub-venue">' + line + '</p>';
 
     (p.aw || []).forEach(([txt, url]) => {
@@ -981,10 +1087,13 @@ const PUBS = [
         '</span></p>';
     });
 
-    const tags = p.app.map(k =>
+    const tags = p.dm.map(k =>
+      '<button type="button" class="tag tag-dom' + (sel.dom.has(k) ? " on" : "") + '" data-g="dom" data-v="' + k +
+      '" aria-pressed="' + sel.dom.has(k) + '">' + esc(DOMAINS[k][0]) + '</button>'
+    ).concat(p.app.map(k =>
       '<button type="button" class="tag tag-app' + (sel.app.has(k) ? " on" : "") + '" data-g="app" data-v="' + k +
       '" aria-pressed="' + sel.app.has(k) + '">' + esc(APPS[k][0]) + '</button>'
-    ).concat(p.m.map(k =>
+    )).concat(p.m.map(k =>
       '<button type="button" class="tag tag-method' + (sel.method.has(k) ? " on" : "") + '" data-g="method" data-v="' + k +
       '" aria-pressed="' + sel.method.has(k) + '">' + esc(METHODS[k]) + '</button>'
     ));
@@ -1046,10 +1155,10 @@ const PUBS = [
     // Venue collapse
     const vb = [...document.querySelectorAll("#chips-venue .chip")];
     vb.forEach((b, i) => {
-      const show = venueExpanded || i < VENUE_LIMIT || sel.venue.has(b.dataset.v);
+      const show = venueExpanded || i < VENUES_SHOWN || sel.venue.has(b.dataset.v);
       b.hidden = !show;
     });
-    const hiddenN = venueKeys.length - VENUE_LIMIT;
+    const hiddenN = venueKeys.length - VENUES_SHOWN;
     const vt = $("venue-toggle");
     vt.hidden = hiddenN <= 0;
     vt.textContent = venueExpanded ? "Show fewer venues" : "Show all " + venueKeys.length + " venues";
@@ -1058,7 +1167,8 @@ const PUBS = [
     const act = $("active");
     let h = "";
     GROUP_ORDER.forEach(g => sel[g].forEach(v => {
-      h += '<button type="button" class="pill pill-' + g + '" data-g="' + g + '" data-v="' + v +
+      const pc = (g === "venue" && v.charAt(0) === "@") ? "hl" : g;
+      h += '<button type="button" class="pill pill-' + pc + '" data-g="' + g + '" data-v="' + v +
         '" aria-label="Remove filter ' + esc(LABEL[g](v)) + '">' + esc(LABEL[g](v)) + '<span class="x" aria-hidden="true">×</span></button>';
     }));
     if (query) h += '<button type="button" class="pill pill-q" data-action="clear-q" aria-label="Clear search">“' + esc($("q").value.trim()) + '”<span class="x" aria-hidden="true">×</span></button>';
@@ -1066,7 +1176,7 @@ const PUBS = [
 
     const any = GROUP_ORDER.some(g => sel[g].size) || !!query;
     $("clear").hidden = !any;
-    const railN = ["method", "venue", "type", "hl"].reduce((s, g) => s + sel[g].size, 0);
+    const railN = ["method", "venue", "type"].reduce((s, g) => s + sel[g].size, 0);
     $("more-count").textContent = railN ? "(" + railN + " selected)" : "";
   }
 
@@ -1092,6 +1202,7 @@ const PUBS = [
       if (i < 0) return;
       const k = kv.slice(0, i), v = decodeURIComponent(kv.slice(i + 1));
       if (k === "q") { $("q").value = v; query = norm(v).trim(); }
+      else if (k === "hl") v.split(",").forEach(x => { if (HIGHLIGHTS[x]) sel.venue.add("@" + x); }); // older links
       else if (sel[k]) v.split(",").forEach(x => { if (x && LABEL[k] && safeLabel(k, x)) sel[k].add(x); });
     });
   }
@@ -1180,6 +1291,28 @@ const PUBS = [
 
   readHash();
   render({ skipHash: true });
+})();
+</script>
+<script>
+(function () {
+  function fixLinks(root) {
+    var embedded = document.documentElement.classList.contains('embedded');
+    (root || document).querySelectorAll('.js-email').forEach(function (a) {
+      var e = a.dataset.u + '@' + a.dataset.d;
+      a.href = 'mailto:' + e;
+      if (!a.dataset.keep) a.textContent = e;
+    });
+    (root || document).querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (h.charAt(0) === '#' || h.indexOf('mailto:') === 0) return;
+      var external = /^https?:/.test(h);
+      // External links open in a new tab; inside an embed, every link does,
+      // so visitors never navigate inside the embed box.
+      if (external || embedded) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  }
+  window.siteFixLinks = fixLinks;
+  fixLinks(document);
 })();
 </script>
 </body>

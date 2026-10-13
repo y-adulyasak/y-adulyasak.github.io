@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Links | Yossiri Adulyasak</title>
+<meta name="description" content="Research groups and profiles of Yossiri Adulyasak.">
+<script>
+  /* When embedded (e.g. in Google Sites) hide the site's own navigation and footer.
+     Force with ?embed=1 or ?embed=0 in the URL. */
+  (function () {
+    var e = false;
+    try { e = window.self !== window.top; } catch (x) { e = true; }
+    if (/[?&]embed=1/.test(location.search)) e = true;
+    if (/[?&]embed=0/.test(location.search)) e = false;
+    if (e) document.documentElement.classList.add('embedded');
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBFCFD;
+    --surface: #FFFFFF;
+    --ink: #16202C;
+    --muted: #5B6776;
+    --rule: #E2E6EB;
+    --app: #0F6E66;
+    --app-bg: #E5F2F0;
+    --method: #4B3FB8;
+    --method-bg: #EEECFA;
+    --venue: #1F3B5C;
+    --venue-bg: #E8EDF3;
+    --hl: #96490A;
+    --hl-bg: #FBF0E2;
+    --focus: #2563EB;
+    --serif: "Literata", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not(.embedded) {
+      --paper: #10161D;
+      --surface: #151C24;
+      --ink: #E6EBF0;
+      --muted: #9AA6B4;
+      --rule: #27323E;
+      --app: #5CC4B7;
+      --app-bg: #13302E;
+      --method: #ADA4F6;
+      --method-bg: #25224A;
+      --venue: #A3BEDD;
+      --venue-bg: #1C2836;
+      --hl: #F0B26B;
+      --hl-bg: #382814;
+      --focus: #7FA7FF;
+    }
+  }
+  html.embedded body { background: #FFFFFF; }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 40px 24px 64px; }
+  html.embedded .wrap { padding-top: 12px; }
+  h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.12; letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .lede { font-size: 1.12rem; color: var(--muted); max-width: 62ch; margin: 0 0 14px; }
+  .section { margin-top: 48px; }
+  .section > h2 { font-family: var(--serif); font-weight: 600; font-size: 1.35rem; margin: 0 0 6px; }
+  .section > .sec-note { color: var(--muted); font-size: 0.93rem; margin: 0 0 16px; max-width: 70ch; }
+  .section > h2 + :not(.sec-note) { margin-top: 14px; }
+  .prose { max-width: 68ch; }
+  .prose p { margin: 0 0 14px; }
+  .prose a, .inline-link { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+  .prose a:hover, .inline-link:hover { text-decoration-color: currentColor; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-size: 0.95rem; font-weight: 500;
+    padding: 9px 16px; border-radius: 6px; border: 1px solid var(--rule);
+    background: var(--surface); color: var(--ink);
+  }
+  .btn:hover { border-color: var(--muted); }
+  .btn-primary { background: var(--app); border-color: var(--app); color: var(--paper); }
+  .btn-primary:hover { border-color: var(--app); filter: brightness(1.08); }
+  button.btn { font: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer; }
+
+  /* Tiles: same treatment as the problem tiles on the publications page */
+  .tile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .tile {
+    display: block; text-decoration: none; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--app);
+    border-radius: 6px; padding: 14px 16px 15px;
+    transition: background-color .15s ease;
+  }
+  a.tile:hover { background: var(--app-bg); }
+  .tile .t-name { display: block; font-family: var(--serif); font-weight: 600; font-size: 1.04rem; line-height: 1.3; margin-bottom: 5px; }
+  .tile .t-desc { display: block; font-size: 0.91rem; color: var(--muted); }
+  .tile .t-example { display: block; font-size: 0.86rem; margin-top: 8px; }
+  .tile .t-link { display: block; margin-top: 8px; font-size: 0.85rem; color: var(--app); font-weight: 500; }
+  .tile.plain { border-left-color: var(--venue); }
+
+  /* Timeline: dates in a left gutter, like the year gutter on the publications page */
+  .tl { list-style: none; margin: 0; padding: 0; max-width: 900px; }
+  .tl > li {
+    display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 2px 24px;
+    padding: 12px 0; border-top: 1px solid var(--rule);
+  }
+  .tl > li:first-child { border-top: 0; padding-top: 2px; }
+  .tl .when { color: var(--muted); font-size: 0.92rem; font-variant-numeric: tabular-nums; padding-top: 1px; }
+  .tl .what { min-width: 0; }
+  .tl .title { font-weight: 600; }
+  .tl .org a { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .tl .org a:hover { text-decoration-color: currentColor; }
+  .tl .sub { display: block; color: var(--muted); font-size: 0.92rem; }
+  .tl .sub a { color: inherit; }
+
+  .dl { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 10px 24px; margin: 0; max-width: 820px; }
+  .dl dt { color: var(--muted); font-size: 0.92rem; }
+  .dl dd { margin: 0; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 24px 16px 48px; }
+    .tl > li, .dl { grid-template-columns: minmax(0, 1fr); }
+    .dl dt { margin-top: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--rule); }
+  .topbar-inner {
+    max-width: 1160px; margin: 0 auto; padding: 14px 24px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px;
+  }
+  .brand { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; text-decoration: none; color: var(--ink); }
+  .nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 0.93rem; }
+  .nav a { color: var(--muted); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+  .nav a:hover { color: var(--ink); }
+  .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--app); }
+  html.embedded .topbar, html.embedded .site-foot { display: none; }
+
+  .site-foot { background: var(--surface); border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.9rem; }
+  .site-foot-inner {
+    max-width: 1160px; margin: 0 auto; padding: 24px 24px 32px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 40px;
+  }
+  .site-foot p { margin: 0 0 4px; }
+  .site-foot .foot-name { color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 1rem; }
+  .site-foot a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .site-foot a:hover { text-decoration-color: currentColor; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+  @media (max-width: 600px) {
+    .topbar-inner, .site-foot-inner { padding-left: 16px; padding-right: 16px; }
+  }
+  @media print { .topbar, .site-foot { display: none !important; } }
+
+  .page { max-width: 780px; }
+  .page h1 { margin-bottom: 6px; }
+  .page .meta { color: var(--muted); margin: 0 0 26px; font-size: 0.95rem; }
+  .page h2 { font-family: var(--serif); font-weight: 600; font-size: 1.28rem; margin: 38px 0 10px; }
+  .page h3 { font-size: 1rem; font-weight: 600; margin: 22px 0 6px; }
+  .page p { margin: 0 0 14px; }
+  .page ul { margin: 0 0 14px; padding-left: 1.25em; }
+  .page li { margin: 5px 0; }
+  .page a { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+  .page a:hover { text-decoration-color: currentColor; }
+
+  .dated { list-style: none; padding: 0 !important; margin: 0 0 14px; }
+  .dated > li { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 2px 18px; margin: 9px 0; }
+  .dated .when { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .dated ul { margin: 4px 0 0; }
+  .dated .sub { color: var(--muted); }
+
+  .profile { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 30px; }
+  .portrait {
+    position: relative; flex: none; width: 150px; aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden;
+    background: var(--app-bg); border: 1px solid var(--rule);
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait .mono {
+    display: none; position: absolute; inset: 0; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 600; font-size: 2.6rem; color: var(--app);
+  }
+  .portrait.no-photo .mono { display: flex; }
+  .roles { list-style: none; padding: 0 !important; margin: 10px 0 12px !important; color: var(--muted); }
+  .roles li { margin: 2px 0; }
+  .roles li:first-child { color: var(--ink); }
+  .contact { display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; }
+
+  @media (max-width: 600px) {
+    .profile { flex-direction: column; gap: 16px; }
+    .portrait { width: 110px; }
+    .portrait .mono { font-size: 1.9rem; }
+    .dated > li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  }
+  @media print {
+    body { background: #fff; color: #000; }
+    .wrap { padding: 0; }
+    a { text-decoration: none !important; }
+  }
+
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><a class="brand" href="index.html">Yossiri Adulyasak</a><nav class="nav" aria-label="Site"><a href="index.html">Home</a><a href="cv.html">Brief CV</a><a href="publications.html">Publications</a><a href="team.html">Research team</a><a href="links.html" aria-current="page">Links</a></nav></div></header>
+<main class="wrap"><div class="page">
+
+<h1>Links</h1>
+
+<h2>Research groups</h2>
+<ul>
+  <li><a href="https://chaireanalytique.hec.ca/en/">Canada Research Chair in Supply Chain Analytics</a></li>
+  <li><a href="https://mila.quebec/en">Mila – Quebec AI Institute</a> (Associate Academic Member)</li>
+  <li><a href="https://www.gerad.ca/en/">GERAD</a>, Group for Research in Decision Analysis</li>
+  <li><a href="https://www.cirrelt.ca/">CIRRELT</a>, Interuniversity Research Centre on Enterprise Networks, Logistics and Transportation</li>
+  <li><a href="https://smart.mit.edu/">SMART</a>, Singapore-MIT Alliance for Research and Technology</li>
+</ul>
+
+<h2>Profiles</h2>
+<ul>
+  <li><a href="https://scholar.google.ca/citations?user=Ru9Zco8AAAAJ&amp;hl=en">Google Scholar</a></li>
+  <li><a href="https://www.hec.ca/en/profs/yossiri-adulyasak">HEC Montréal faculty page</a></li>
+  <li><a href="https://www.gerad.ca/en/people/yossiri-adulyasak">GERAD member page</a></li>
+  <li><a href="https://ca.linkedin.com/in/ayossiri">LinkedIn</a></li>
+  <li><a href="https://github.com/y-adulyasak">GitHub</a> (instances and data)</li>
+</ul>
+
+</div></main>
+
+<script>
+(function () {
+  function fixLinks(root) {
+    var embedded = document.documentElement.classList.contains('embedded');
+    (root || document).querySelectorAll('.js-email').forEach(function (a) {
+      var e = a.dataset.u + '@' + a.dataset.d;
+      a.href = 'mailto:' + e;
+      if (!a.dataset.keep) a.textContent = e;
+    });
+    (root || document).querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (h.charAt(0) === '#' || h.indexOf('mailto:') === 0) return;
+      var external = /^https?:/.test(h);
+      // External links open in a new tab; inside an embed, every link does,
+      // so visitors never navigate inside the embed box.
+      if (external || embedded) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  }
+  window.siteFixLinks = fixLinks;
+  fixLinks(document);
+})();
+</script>
+</body>
+</html>
