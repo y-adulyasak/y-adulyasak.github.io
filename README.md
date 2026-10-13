@@ -1,7 +1,5 @@
 # Yossiri Adulyasak — website
 
-Five self-contained pages with the same menu as the original Google Site:
-
 | File | Page |
 |---|---|
 | `index.html` | Home |
@@ -10,8 +8,6 @@ Five self-contained pages with the same menu as the original Google Site:
 | `team.html` | Research team |
 | `links.html` | Links |
 
-`photo.jpg` is the portrait on the home page; upload it together with the pages. To change it, replace the file
-with another portrait-format photo (about 3:4) of the same name.
 
 ## Publish on GitHub Pages
 
