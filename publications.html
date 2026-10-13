@@ -462,8 +462,9 @@
      d    volume, issue, pages, or patent number (optional)
      st   status, e.g. "To appear", "Online", "Under revision at ..." (optional)
      type journal | conference | wp | case | patent | other
-     app  application tags (keys of APPS); use "fundamental" when the
-          work is not tied to one application
+     app  application tags (keys of APPS); use "fundamental" for
+          methodological work not tied to one application, and "other"
+          for reviews or applications outside the listed areas
      dm   methodological domain(s): "or", "ml", or both
      m    method tags (keys of METHODS)
      ind  true for work done with an industrial partner; adds it to
@@ -485,6 +486,7 @@ const APPS = {
   demand:      ["Demand & Retail", "Demand forecasting, retail analytics and demand behaviour"],
   platforms:   ["Digital Platforms", "Online reviews, recommendation, customer service and platform behaviour"],
   health:      ["Healthcare & Humanitarian", "Home health care, humanitarian relief and supply chains"],
+  other:       ["Other applications", "Literature reviews and applications outside supply chains, such as computer vision"],
   fundamental: ["Fundamental Research", "Methodological work not tied to a single application"]
 };
 
@@ -734,7 +736,7 @@ const PUBS = [
     l: [["Paper", "https://doi.org/10.1287/ijoc.2020.1026"], ["Instances", "https://github.com/QinxiaoYu/TOPTTP"]] },
   { y: 2022, type: "journal", a: "Nguyen, D.-T., Adulyasak, Y., Cordeau, J.-F., Ponce, S.",
     t: "Data-Driven Operations and Supply Chain Management: Established Research Clusters from 2000 to early 2020",
-    v: "ijpr", d: "60(17), 5407–5431", app: ["fundamental"], dm: ["or"], m: ["emp"],
+    v: "ijpr", d: "60(17), 5407–5431", app: ["other"], dm: ["or"], m: ["emp"],
     l: [["Paper", "https://doi.org/10.1080/00207543.2021.1956695"], ["Supplement", "https://docs.google.com/uc?id=1nI1sIfCOayloYeF1m9g4VvWGwRFt49RW&export=download&hl=en"]] },
 
   /* ---------- 2021 ---------- */
@@ -767,7 +769,7 @@ const PUBS = [
   /* ---------- 2020 and earlier ---------- */
   { y: 2020, type: "journal", a: "Yarkony, J., Adulyasak, Y., Singh, M., Desaulniers, G.",
     t: "Data Association via Set Packing for Computer Vision Applications",
-    v: "ijoo", d: "2(3), 167–191", app: ["fundamental"], dm: ["or", "ml"], m: ["exact", "aiapp"],
+    v: "ijoo", d: "2(3), 167–191", app: ["other"], dm: ["or", "ml"], m: ["exact", "aiapp"],
     l: [["Paper", "https://pubsonline.informs.org/doi/10.1287/ijoo.2019.0030"]] },
   { y: 2020, type: "journal", a: "Cheng, C., Adulyasak, Y., Rousseau, L.-M.",
     t: "Drone Routing with Energy Function: Formulation and Exact Algorithm",
@@ -894,7 +896,7 @@ const PUBS = [
   /* ---------- Patents ---------- */
   { type: "patent", a: "Yarkony, J., Adulyasak, Y., Singh, M. K., Desaulniers, G.",
     t: "Computer Vision Systems and Methods for Machine Learning Using a Set Packing Framework",
-    d: "US Patent Application 16/870,492", app: ["fundamental"], dm: ["or", "ml"], m: ["aiapp", "exact"] },
+    d: "US Patent Application 16/870,492", app: ["other"], dm: ["or", "ml"], m: ["aiapp", "exact"] },
   { type: "patent", a: "Adulyasak, Y., Cordeau, J.-F., Prescott-Gagnon, E., Raymond, V., Thevenin, S.",
     t: "System and Method of Calculating Order Policy for Production Planning with Stochastic Demand",
     d: "US Patent Application", app: ["prodinv"], dm: ["or"], m: ["stoch"] },
