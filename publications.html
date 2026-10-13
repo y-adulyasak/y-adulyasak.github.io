@@ -527,7 +527,12 @@ const HIGHLIGHTS = {
    move a line up or down to change the order. The first VENUES_SHOWN appear
    before "Show all"; the rest appear when it is clicked.
    utd / ai flags put a venue in the UTD24 and ML/AI conference groups
-   shown at the top of the filter. */
+   shown at the top of the filter.
+   filter: false keeps a venue on its papers but leaves it out of the filter.
+
+   This section is JavaScript: to switch a line off, start it with //
+   (or wrap several lines in slash-star ... star-slash). HTML comment
+   markers (less-than, exclamation, dash, dash) break the page. */
 const VENUES_SHOWN = 10;
 
 const VENUES = {
@@ -545,7 +550,7 @@ const VENUES = {
   jair:     { s: "JAIR",                            f: "Journal of Artificial Intelligence Research" },
   msom:     { s: "MSOM",                            f: "Manufacturing & Service Operations Management", utd: true },
   or:       { s: "Operations Research",             f: "Operations Research", utd: true },
-  <!-- ricg:     { s: "Revue int. de cas en gestion",    f: "Revue internationale de cas en gestion" },-->
+  ricg:     { s: "Revue int. de cas en gestion",    f: "Revue internationale de cas en gestion", filter: false },
   cpaior:   { s: "CPAIOR",                          f: "Integration of Constraint Programming, Artificial Intelligence, and Operations Research (CPAIOR)", ai: true },
   ecml:     { s: "ECML PKDD",                       f: "European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD)", ai: true },
   ecr:      { s: "Electronic Commerce Research",    f: "Electronic Commerce Research" },
@@ -1001,10 +1006,12 @@ const PUBS = [
   const nWp = PUBS.filter(p => p.type === "wp").length;
   const nPat = PUBS.filter(p => p.type === "patent").length;
   const nCase = PUBS.filter(p => p.type === "case").length;
-  /* $("lede").textContent =
-    "Brief statistics:" + PUBS.length + " works on supply chain analytics, optimization under uncertainty and ML/AI: " +
+  /* Statistics line, turned off. To show it again, remove the slash-star and star-slash markers around it.
+  $("lede").textContent =
+    "Brief statistics: " + PUBS.length + " works on supply chain analytics, optimization under uncertainty and ML/AI: " +
     nPeer + " peer-reviewed papers, " + nWp + " under review, " + nPat + " patents and " + nCase +
-    " teaching cases.";*/
+    " teaching cases.";
+  */
   $("lede").textContent = "Research works on supply chain analytics, optimization under uncertainty and ML/AI";
   $("updated").textContent = "List updated " + UPDATED + ".";
 
@@ -1042,7 +1049,7 @@ const PUBS = [
   }
   makeChips("chips-method", "method", Object.keys(METHODS).filter(k => total("method", k) > 0), "chip-method");
   const venueKeys = Object.keys(VENUES)
-    .filter(k => total("venue", k) > 0);
+    .filter(k => VENUES[k].filter !== false && total("venue", k) > 0);
   makeChips("chips-venue", "venue", venueKeys, "chip-venue");
   makeChips("chips-type", "type", Object.keys(TYPES).filter(k => total("type", k) > 0), "chip-type");
   makeChips("chips-vset", "venue", Object.keys(HIGHLIGHTS).map(k => "@" + k), "chip-hl");
@@ -1056,7 +1063,7 @@ const PUBS = [
     h += '<p class="pub-authors">' + esc(p.a).replace(ME, m => "<strong>" + m + "</strong>") + '</p>';
 
     const parts = [];
-    if (p.v) {
+    if (p.v && VENUES[p.v]) {
       const V = VENUES[p.v];
       parts.push('<button type="button" class="venue-link" data-g="venue" data-v="' + p.v +
         '" title="Show everything in ' + esc(V.f) + '">' + esc(p.vt || V.f) + '</button>');
